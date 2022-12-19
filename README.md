@@ -1,9 +1,14 @@
 # MailMerge
-Simple templates to send from cli, or in automation.
+Simple templates to send from cli, or in automation.\
 This project had built all needed templates to use with [mailmerge](https://github.com/awdeorio/mailmerge).\
-It consists out of **templates** and **databases**.  Databases are the files with variable content to send.\
+It consists out of **templates** and **databases**.\
+Databases are the files with variable content to send.\
+
+In the templates the variable names are used with {{}}, e.g. {{variableName}}.\
+The **variables names** are found in the database headers.
+
 E.g.  1 template can be used in conjunction with several possible databases.\
-See [Manual Usage](#Manual Usage) section below for combo's.   
+(only 1 at the time) See [Manual Usage](#manual-usage) section below for combo's.   
 
 # Pre-req's
 * Python runtime installed (this can be done as one of your steps of your pipeline)
