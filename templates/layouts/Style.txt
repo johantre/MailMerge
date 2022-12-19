@@ -1,13 +1,6 @@
-TO: {{email}}
-SUBJECT: {{system}} {{message}}
-FROM: MRI-Productteam <johan_tre@hotmail.com>
-Content-Type: text/html
+{% extends "layouts/Mail.html" %}
 
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-      xmlns:o="urn:schemas-microsoft-com:office:office"
-      xmlns:w="urn:schemas-microsoft-com:office:word"
-      xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-      xmlns="http://www.w3.org/TR/REC-html40">
+{% block headStyle %}
 <head>
     <meta http-equiv=Content-Type content="text/html; charset=unicode">
     <meta name=ProgId content=Word.Document>
@@ -829,6 +822,5 @@ div.WordSection1
     </style>
     <![endif]-->
 </head>
+{% endblock %}
 {% block actionType required %}{% endblock %}
-
-</html>

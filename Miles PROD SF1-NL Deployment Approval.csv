@@ -1,2 +1,2 @@
-﻿"system","message","email","name","recipient","text1","text2","actionMessage","fixVersionURL","fixVersionName","actionRecipientName","actionRecipientAddress",""
+﻿"system","message","email","name","recipient","text1","text2","actionMessage","fixVersionURL1","fixVersionName1","actionRecipientName","actionRecipientAddress",""
 "Miles PROD SF1-NL","Deployment Approval","johan.tre@gmail.com","MRI-Productteam@bmwgroup.com","Vikram Christophe David","Below the final list and attached the zip files. It contains only xml’s and a sql.","","Please approve these changes.","https://atc.bmwgroup.net/jira/browse/MILES4ALL/fixforversion/253605","2022 W42 Release NL","@Patrick Janssen, SF1-NL-S","Patrick.Janssen@bmw.nl"

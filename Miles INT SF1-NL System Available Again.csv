@@ -1,2 +1,2 @@
-"system","message","email","name","reason","date","fromTime","toTime","text1","text2","text3","text4","text5","text6","text7"
-"Miles INT SF1-NL","System Available again","johan.tre@gmail.com","MRI-Productteam@bmwgroup.com","","","","","The systems are available again for testing.<br>Testing activities can be continued on ","",".<br>","","","",""
+"system","message","email","name","text1","text2","text3","text4","text5","date","fromTime","toTime","reason"
+"Miles INT SF1-NL","System Available again","johan.tre@gmail.com","MRI-Productteam@bmwgroup.com","The systems are available again for testing.<br>Testing activities can be continued on ","","","","","","","",""
