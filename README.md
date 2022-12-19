@@ -15,41 +15,46 @@ And you're off to get started!
 Below some explanation how this project is to be used
 * In terminal cli
   - root of the project call: mailmerge --no-dry-run --template "path to template" --database "path to databasename"
-  - e.g. mailmerge --no-dry-run --template "[templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html)" --database "[Miles PROD SF1-NL Deployment Approval.csv](.Miles PROD SF1-NL Deployment Approval.csv)"
+  - e.g. mailmerge --no-dry-run --template "[templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html)" --database "[Miles&#32;PROD&#32;SF1-NL&#32;Deployment&#32;Approval.csv](.Miles&#32;PROD&#32;SF1-NL&#32;Deployment&#32;Approval.csv)"
   - Check out [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge) for extensive usage.
   - type mailmerge --help for options.  
 * Setup your smtp mailserver in [mailmerge_server.conf](mailmerge_server.conf) 
 
 * What template to use with which database?  Basically you have 3 templates and can be used in conjuction with the csv's below them.
   - [SystemAvailability.html](./templates/SystemAvailability.html) for notifying systems of a market are unavailable, or available again. 
-    - [Miles INT SF1-BE System Unavailable.csv](Miles INT SF1-BE System Unavailable.csv) 
-    - [Miles INT SF1-BE System Available Again.csv](Miles INT SF1-BE System Available Again.csv)
-    - [Miles INT SF1-NL System Unavailable.csv](Miles INT SF1-NL System Unavailable.csv)
-    - [Miles INT SF1-NL System Available Again.csv](Miles INT SF1-NL System Available Again.csv)
+    - [Miles&#32;INT&#32;SF1-BE&#32;System&#32;Unavailable.csv]('Miles&#32;INT&#32;SF1-BE&#32;System&#32;Unavailable.csv') 
+    - [Miles&#32;INT&#32;SF1-BE&#32;System&#32;Available&#32;Again.csv](Miles&#32;INT&#32;SF1-BE&#32;System&#32;Available&#32;Again.csv)
+    - [Miles&#32;INT&#32;SF1-NL&#32;System&#32;Unavailable.csv](Miles&#32;INT&#32;SF1-NL&#32;System&#32;Unavailable.csv)
+    - [Miles&#32;INT&#32;SF1-NL&#32;System&#32;Available&#32;Again.csv](Miles&#32;INT&#32;SF1-NL&#32;System&#32;Available&#32;Again.csv)
   - [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) for asking market rep of 1 market for approval or to notify requesters a deploy happened.  
-    - [Miles PROD SF1-BE Deployment.csv](Miles PROD SF1-BE Deployment.csv)
-    - [Miles PROD SF1-BE Deployment Approval.csv](Miles PROD SF1-BE Deployment Approval.csv)
-    - [Miles PROD SF1-NL Deployment.csv](Miles PROD SF1-NL Deployment.csv)
-    - [Miles PROD SF1-NL Deployment Approval.csv](Miles PROD SF1-NL Deployment Approval.csv)
+    - [Miles&#32;PROD&#32;SF1-BE&#32;Deployment.csv](Miles&#32;PROD&#32;SF1-BE&#32;Deployment.csv)
+    - [Miles&#32;PROD&#32;SF1-BE&#32;Deployment&#32;Approval.csv](Miles&#32;PROD&#32;SF1-BE&#32;Deployment&#32;Approval.csv)
+    - [Miles&#32;PROD&#32;SF1-NL&#32;Deployment.csv](Miles&#32;PROD&#32;SF1-NL&#32;Deployment.csv)
+    - [Miles&#32;PROD&#32;SF1-NL&#32;Deployment&#32;Approval.csv](Miles&#32;PROD&#32;SF1-NL&#32;Deployment&#32;Approval.csv)
   - [DeploymentMultipleMarket.html](./templates/DeploymentMultipleMarket.html) for asking market reps of both markets for approval or to notify requesters a deploy happened.
-    - [Miles PROD SF1-BE-NL Deployment Approval.csv](Miles PROD SF1-BE-NL Deployment Approval.csv)
-    - [Miles PROD SF1-BE-NL Deployment.csv](Miles PROD SF1-BE-NL Deployment.csv)
+    - [Miles&#32;PROD&#32;SF1-BE-NL&#32;Deployment&#32;Approval.csv](Miles&#32;PROD&#32;SF1-BE-NL&#32;Deployment&#32;Approval.csv)
+    - [Miles&#32;PROD&#32;SF1-BE-NL&#32;Deployment.csv](Miles&#32;PROD&#32;SF1-BE-NL&#32;Deployment.csv)
 
 # File structure
 Below the file structure to understand the remaining template snippets
 - [SystemAvailability.html](./templates/SystemAvailability.html) inherits from 
   - [Notification.html](./templates/layouts/Notification.html) which is the base of all notifications.\
-  It has got all images on board to be shown for a notification mail. On its turn this inherits from 
+  It has got all images on board to be shown for a notification mail.\
+  On its turn this inherits from 
     - [BaseTemplate.html](./templates/layouts/BaseTemplate.html) which serves all mail communication needs like to, from, cc, subject fields etc.
 - [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) inherits from
-  - [Deployment.html](./templates/layouts/Notification.html) which is the base of all deployment related mail communication. On its turn this inherits from
+  - [Deployment.html](./templates/layouts/Notification.html) which is the base of all deployment related mail communication.\
+  On its turn this inherits from
     - [ActionRequired.html](./templates/layouts/ActionRequired.html) which is the base of all action required mail communication.\
-    It has got all images on board to be shown for a action required mail. On its turn this inherits from
+    It has got all images on board to be shown for a action required mail.\
+    On its turn this inherits from
       - [BaseTemplate.html](./templates/layouts/BaseTemplate.html) which serves all mail communication needs like to, from, cc, subject fields etc.
 - [DeploymentMultipleMarket.html](./templates/DeploymentMultipleMarket.html) inherits from
-  - [Deployment.html](./templates/layouts/Notification.html) which is the base of all deployment related mail communication. On its turn this inherits from
+  - [Deployment.html](./templates/layouts/Notification.html) which is the base of all deployment related mail communication.\
+  On its turn this inherits from
     - [ActionRequired.html](./templates/layouts/ActionRequired.html) which is the base of all action required mail communication.\
-    It has got all images on board to be shown for a action required mail. On its turn this inherits from
+    It has got all images on board to be shown for a action required mail.\
+    On its turn this inherits from
       - [BaseTemplate.html](./templates/layouts/BaseTemplate.html) which serves all mail communication needs like to, from, cc, subject fields etc.
 
 
