@@ -15,14 +15,14 @@ And you're off to get started!
 Below some explanation how this project is to be used
 * In terminal cli
   - root of the project call: mailmerge --no-dry-run --template "path to template" --database "path to databasename"
-  - e.g. mailmerge --no-dry-run --template "[templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html)" --database "[Miles PROD SF1-NL Deployment Approval.csv](.Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)"
+  - e.g. mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](.Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)
   - Check out [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge) for extensive usage.
   - type mailmerge --help for options.  
 * Setup your smtp mailserver in [mailmerge_server.conf](mailmerge_server.conf) 
 
 * What template to use with which database?  Basically you have 3 templates and can be used in conjuction with the csv's below them.
   - [SystemAvailability.html](./templates/SystemAvailability.html) for notifying systems of a market are unavailable, or available again. 
-    - [Miles INT SF1-BE System Unavailable.csv]('Miles%20INT%20SF1-BE%20System%20Unavailable.csv') 
+    - [Miles INT SF1-BE System Unavailable.csv](Miles%20INT%20SF1-BE%20System%20Unavailable.csv) 
     - [Miles INT SF1-BE System Available Again.csv](Miles%20INT%20SF1-BE%20System%20Available%20Again.csv)
     - [Miles INT SF1-NL System Unavailable.csv](Miles%20INT%20SF1-NL%20System%20Unavailable.csv)
     - [Miles INT SF1-NL System Available Again.csv](Miles%20INT%20SF1-NL%20System%20Available%20Again.csv)
