@@ -75,11 +75,15 @@ Below the file structure to understand the remaining template snippets
 However, the purpose isn't changing the templates but rather the databases.\
 With this it becomes possible to add mail communication as part of your releases.
 * CSV's are a brittle file format.\
-To make it a little more robust for field content, the fields are surrounded with double quotes to guarantee file consistency.\
+To make it a little more robust for field content, all fields are surrounded with double quotes.\
 Using ',' within the CSV fields doesn't harm anymore and becomes usable now. (e.g. multiple mail addresses)\
-For this reason, **avoid using Excel as editor for changing these database files**. Locale in the west is mostly using ';' as a delimiter.\
-Opening the csv databases with Excel and saving removes your double quotes ' " ' and replaces comma's ',' by semicolon ';'.\
-Plenty of good editors are out there better suitable for the job.  IntelliJ, Notepad++, UltraEdit to name a few. 
+For this reason, **avoid using Excel as editor for changing these database files**.\
+Locale in the west is mostly using ';' as a delimiter.\
+Opening the csv databases with Excel and saving 
+  * removes your double quotes ' " '  !!!
+  * replaces comma's ',' by semicolon ';'.!!\
+  Plenty of good editors are out there better suitable for the job.\
+  IntelliJ, Notepad++, UltraEdit to name a few. 
 * Ideas future usage: 
   * Using your commit message as a field for the templates. 
   * Having your approval reply mail triggering a pipeline. 
