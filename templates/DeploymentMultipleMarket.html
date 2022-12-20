@@ -3,51 +3,31 @@ ATTACHMENT: ../images/{{fixVersionName2}}/image001.png
 {% extends "layouts/Deployment.html" %}
 
 {% block fixVersion %}
-        <p align=center class=MsoNormal style='text-align:center'><span style='color:black'><a href="{{fixVersionURL1}}"><span lang=EN-US style='font-size:10.5pt;font-family:-apple-system;color:#2290C5; background:white;mso-ansi-language:EN-US'>{{fixVersionName1}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><o:p></o:p></span></p>
-        <p align=center class=MsoNormal style='text-align:center'><span style='color:black'><a href="{{fixVersionURL2}}"><span lang=EN-US style='font-size:10.5pt;font-family:-apple-system;color:#2290C5; background:white;mso-ansi-language:EN-US'>{{fixVersionName2}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><o:p></o:p></span></p>
+        <p align=center class=MsoNormal style='text-align:center'>
+                <span style='color:black'><a href="{{fixVersionURL1}}"><span lang=EN-US style='font-size:10.5pt;font-family:-apple-system;color:#2290C5; background:white;mso-ansi-language:EN-US'>{{fixVersionName1}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><o:p></o:p></span>
+        </p>
+        <p align=center class=MsoNormal style='text-align:center'>
+                <span style='color:black'><a href="{{fixVersionURL2}}"><span lang=EN-US style='font-size:10.5pt;font-family:-apple-system;color:#2290C5; background:white;mso-ansi-language:EN-US'>{{fixVersionName2}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><o:p></o:p></span>
+        </p>
 {% endblock %}
 {% block actionNames %}
         <p align=center class=MsoNormal style='text-align:center'><span style='color:black'>
-                <a href="mailto:{{actionRecipientAddress1}}"><span lang=EN-US style='background:#E1DFDD;mso-ansi-language:EN-US'>{{actionRecipientName1}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language: EN-US'>,&nbsp;</span>
-                <span style='color:black'><a href="mailto:{{actionRecipientAddress1}}"><span lang=EN-US style='background:#E1DFDD;mso-ansi-language:EN-US'>{{actionRecipientName2}}</span></a></span><span lang=EN-US style='color:black;
-                                                                  mso-ansi-language:EN-US'> &nbsp;</span>
+                <a href="mailto:{{actionRecipientAddress1}}"><span lang=EN-US style='background:#E1DFDD;mso-ansi-language:EN-US'>{{actionRecipientName1}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language: EN-US'>, </span>
+                <span style='color:black'><a href="mailto:{{actionRecipientAddress1}}"><span lang=EN-US style='background:#E1DFDD;mso-ansi-language:EN-US'>{{actionRecipientName2}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'>  </span>
                 <b><span lang=EN-US style='font-size:16.0pt;color:red;mso-ansi-language:EN-US'> {{actionMessage}}<o:p></o:p></span></b></p>
 {% endblock %}
 {% block images %}
-<p class=MsoNormal style='margin-bottom:12.0pt'><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><br>
-        <!--[if gte vml 1]>
-        <v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
-                <v:stroke joinstyle="miter"/>
-                <v:formulas>
-                        <v:f eqn="if lineDrawn pixelLineWidth 0"/>
-                        <v:f eqn="sum @0 1 0"/>
-                        <v:f eqn="sum 0 0 @1"/>
-                        <v:f eqn="prod @2 1 2"/>
-                        <v:f eqn="prod @3 21600 pixelWidth"/>
-                        <v:f eqn="prod @3 21600 pixelHeight"/>
-                        <v:f eqn="sum @0 0 1"/>
-                        <v:f eqn="prod @6 1 2"/>
-                        <v:f eqn="prod @7 21600 pixelWidth"/>
-                        <v:f eqn="sum @8 21600 0"/>
-                        <v:f eqn="prod @7 21600 pixelHeight"/>
-                        <v:f eqn="sum @10 21600 0"/>
-                </v:formulas>
-                <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
-                <o:lock v:ext="edit" aspectratio="t"/>
-        </v:shapetype>
-        <v:shape id="Picture_x0020_4" o:spid="_x0000_i1029" type="#_x0000_t75" alt="" style='width:1209pt;height:282pt'>
-                <v:imagedata src="../images/{{fixVersionName1}}/image001.png" o:href="cid:image001.png@01D8E4A9.8DC87440"/>
-        </v:shape><![endif]-->
-        <![if !vml]><img border=0 src="../images/{{fixVersionName1}}/image001.png" style='width:16.791in' v:shapes="Picture_x0020_4" width=1612><![endif]>
-        </span>
-        <span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
-        <p class=MsoNormal style='margin-bottom:12.0pt'><span lang=EN-US style='color:black;mso-ansi-language:EN-US'>
-        <!--[if gte vml 1]>
-        <v:shape id="Picture_x0020_5" o:spid="_x0000_i1030" type="#_x0000_t75" alt="" style='width:1214.4pt; height:238.2pt'>
-                <v:imagedata src="../images/{{fixVersionName2}}/image001.png" o:href="cid:image002.png@01D8E4A9.8DC87440"/>
-        </v:shape><![endif]-->
-        <![if !vml]><img border=0 src="../images/{{fixVersionName2}}/image001.png" style='width:16.791in' v:shapes="Picture_x0020_5" width=1612><![endif]>
-        </span>
-        <span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+        <p class=MsoNormal style='margin-bottom:12.0pt'>
+                <span lang=EN-US style='color:black;mso-ansi-language:EN-US'><br>
+                        <img src="../images/{{fixVersionName1}}/image001.png" width=1612>
+                </span>
+                <span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span>
+        </p>
+        <p class=MsoNormal style='margin-bottom:12.0pt'>
+                <span lang=EN-US style='color:black;mso-ansi-language:EN-US'>
+                        <img border=0 src="../images/{{fixVersionName2}}/image001.png" width=1612>
+                </span>
+                <span lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span>
+        </p>
 {% endblock %}
 
