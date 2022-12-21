@@ -2,11 +2,11 @@ ATTACHMENT: ../images/{{fixVersionName1}}/image001.png
 {% extends "layouts/Deployment.html" %}
 {% block fixVersion %}
         <p align=center class=MsoNormal style='text-align:center'>
-                <span style='color:black'><a href="{{fixVersionURL1}}"><span lang=EN-US style='font-size:10.5pt;font-family:-apple-system;color:#2290C5; background:white;mso-ansi-language:EN-US'>{{fixVersionName1}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><o:p></o:p></span>
+                <span style='color:black'><a href="{{fixVersionURL1}}"><span lang=EN-US style='font-size:10.5pt; color:#2290C5; background:white;mso-ansi-language:EN-US'>{{fixVersionName1}}</span></a></span><span lang=EN-US style='color:black;mso-ansi-language:EN-US'><o:p></o:p></span>
         </p>
 {% endblock %}
 {% block actionNames %}
-        <p align=center class=MsoNormal style='text-align:center'><a href="mailto:{{actionRecipientAddress}}"><span lang=EN-US style='background:#E1DFDD;mso-ansi-language:EN-US'>{{actionRecipientName}}</span></a><b><span lang=EN-US style='font-size:16.0pt;color:red;mso-ansi-language:EN-US'> {{actionMessage}}<o:p></o:p></span></b></p>
+        <p align=center class=MsoNormal style='text-align:center'><br><a href="mailto:{{actionRecipientAddress}}"><span lang=EN-US style='background:#E1DFDD;mso-ansi-language:EN-US'>{{actionRecipientName}}</span></a><b><span lang=EN-US style='font-size:16.0pt;color:red;mso-ansi-language:EN-US'> {{actionMessage}}<o:p></o:p></span></b></p>
 {% endblock %}
 {% block images %}
         <p class=MsoNormal style='margin-bottom:12.0pt'>
