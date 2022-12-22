@@ -20,23 +20,23 @@ And you're off to get started!
 Below some explanation how this project is to be used
 * In terminal cli
   - root of the project call: mailmerge --no-dry-run --template "path to template" --database "path to databasename"
-  - e.g. mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](.Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)
+  - e.g. mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)
   - Check out [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge) for extensive usage.
   - type mailmerge --help for options.  
-* Setup your smtp mailserver in [mailmerge_server.conf](mailmerge_server.conf) 
+* Set up your smtp mailserver in [mailmerge_server.conf](mailmerge_server.conf) 
 * Deployment mail templates like [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) and [DeploymentMultipleMarket.html](./templates/DeploymentMultipleMarket.html) have the possibility to attach an image of the test run report.\
 Include those image by leaving them in a folder with the name of your release with the **standard name "image001.png"**.\
 Adapt your database to refer to the right release you're mailing for.\
 The mail template will pick them up and include them in the mail.\
-(e.g.[2022 W42 Release BE](./images/2022%20W42%20Release%20BE)) with the image name [image001.png](./images/2022%20W42%20Release%20BE/image001.png))
+  (e.g.[2022 W42 Release BE](./images/2022%20W42%20Release%20BE) with the image name [image001.png](./images/2022%20W42%20Release%20BE/image001.png))
 
-* What template to use with which database?  Basically you have 3 templates and can be used in conjuction with the csv's below them.
+* What template to use with which database?  Basically you have 3 templates and can be used in conjunction with the csv's below them.
   - [SystemAvailability.html](./templates/SystemAvailability.html) for notifying systems of a market are unavailable, or available again. 
     - [Miles INT SF1-BE System Unavailable.csv](Miles%20INT%20SF1-BE%20System%20Unavailable.csv) 
     - [Miles INT SF1-BE System Available Again.csv](Miles%20INT%20SF1-BE%20System%20Available%20Again.csv)
     - [Miles INT SF1-NL System Unavailable.csv](Miles%20INT%20SF1-NL%20System%20Unavailable.csv)
     - [Miles INT SF1-NL System Available Again.csv](Miles%20INT%20SF1-NL%20System%20Available%20Again.csv)
-  - [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) for asking market rep of 1 market for approval or to notify requesters a deploy happened.  
+  - [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) for asking market rep of 1 market for approval or to notify requesters a deployment happened.  
     - [Miles PROD SF1-BE Deployment.csv](Miles%20PROD%20SF1-BE%20Deployment.csv)
     - [Miles PROD SF1-BE Deployment Approval.csv](Miles%20PROD%20SF1-BE%20Deployment%20Approval.csv)
     - [Miles PROD SF1-NL Deployment.csv](Miles%20PROD%20SF1-NL%20Deployment.csv)
@@ -57,7 +57,7 @@ Below the file structure to understand the remaining template snippets
   - [Deployment.html](./templates/layouts/Notification.html) which is the base of all deployment related mail communication.\
   On its turn this inherits from
     - [ActionRequired.html](./templates/layouts/ActionRequired.html) which is the base of all action required mail communication.\
-    It has got all images on board to be shown for a action required mail.\
+    It has got all images on board to be shown for an action required mail.\
     On its turn this inherits from
       - [BaseTemplate.html](./templates/layouts/BaseTemplate.html) which serves all mail communication needs like\
       to, from, cc, subject fields etc.
@@ -65,7 +65,7 @@ Below the file structure to understand the remaining template snippets
   - [Deployment.html](./templates/layouts/Notification.html) which is the base of all deployment related mail communication.\
   On its turn this inherits from
     - [ActionRequired.html](./templates/layouts/ActionRequired.html) which is the base of all action required mail communication.\
-    It has got all images on board to be shown for a action required mail.\
+    It has got all images on board to be shown for an action required mail.\
     On its turn this inherits from
       - [BaseTemplate.html](./templates/layouts/BaseTemplate.html) which serves all mail communication needs like\
       to, from, cc, subject fields etc.
@@ -87,4 +87,4 @@ Opening the csv databases with Excel and saving
 * Ideas future usage: 
   * Using your commit message as a field for the templates. 
   * Having your approval reply mail triggering a pipeline. 
-  * Having your mail sent when a pipeline is (successfully) finised. 
+  * Having your mail sent when a pipeline is (successfully) finished. 
