@@ -45,6 +45,13 @@ The mail template will pick them up and include them in the mail.\
     - [Miles PROD SF1-BE-NL Deployment Approval.csv](Miles%20PROD%20SF1-BE-NL%20Deployment%20Approval.csv)
     - [Miles PROD SF1-BE-NL Deployment.csv](Miles%20PROD%20SF1-BE-NL%20Deployment.csv)
 
+* Interactive script added to facilitate triggering mail with all database content: [milesMail.sh](milesMail.sh)\
+Usage on cli: $ bash milesMail.sh\
+The script asks you for input parameters to determine which mail you like to use. Is the mail for: 
+  - Letter code of market: <font color='red'>(BE,NL,BE-NL)</font>:
+  - Deployment Approval, Deployment, System Unavailable, System Available Again <font color='red'>(1,2,3,4)</font>:
+  - Combination of sending system (Un)Available (<font color='red'>3 or 4</font>) for multiple markets (<font color='red'>BE-NL</font>) is not possible and fed back through cli response.   
+
 # File structure
 Below the file structure to understand the remaining template snippets
 - [SystemAvailability.html](./templates/SystemAvailability.html) inherits from 
@@ -88,3 +95,4 @@ Opening the csv databases with Excel and saving
   * Using your commit message as a field for the templates. 
   * Having your approval reply mail triggering a pipeline. 
   * Having your mail sent when a pipeline is (successfully) finished. 
+  * Asking for mail content through cli.

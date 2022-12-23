@@ -14,7 +14,7 @@ while true; do
   if [ "$tryAgain" != "Y" ]; then
     read -p "$(echo -e "type the template respective number: Deployment, Deployment Approval, System Unavailable, System Available Again "$RED"(1,2,3,4)"$NC":")" templateNumber
     if  [ "$templateNumber" != "1" ] && [ "$templateNumber" != "2" ] && [ "$templateNumber" != "3" ] && [ "$templateNumber" != "4" ]; then
-      read -p "$(echo -e "Invalid input: "$RED$templateNumber$NC" Usage: Deployment, Deployment Approval, System Unavailable, System Available Again "$RED"(1,2,3,4)"$NC". Try again? "$RED"(Y/N)"$NC":")" tryAgain;
+      read -p "$(echo -e "Invalid input: "$RED$templateNumber$NC" Usage: Deployment Approval, Deployment, System Unavailable, System Available Again "$RED"(1,2,3,4)"$NC". Try again? "$RED"(Y/N)"$NC":")" tryAgain;
         if [ $tryAgain != "Y" ]; then exit 0; fi
     else
       tryAgain="";
@@ -38,9 +38,9 @@ else
 fi
 
 case $templateNumber in
-  1) databaseName="Deployment" ;
+  1) databaseName="Deployment Approval" ;
     templateName="Deployment"$templateMultiplier"Market" ;;
-  2) databaseName="Deployment Approval" ;
+  2) databaseName="Deployment" ;
     templateName="Deployment"$templateMultiplier"Market" ;;
   3) databaseName="System Unavailable" ;
     templateName="SystemAvailability" ;;
