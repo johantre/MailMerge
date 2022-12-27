@@ -88,7 +88,7 @@ fi
 #Assembling it all, substitute variables if $NOTRACE
 databasePath="$systemName$marketName $databaseName.csv";
 if [ "$templateNumber" == "3" ] && [ "$NOTRACE" == true ]; then
-  cat "$databasePath" | sed -e "s§\${reason}§""$reason""§" | sed -e "s§\${date}§""$date""§" | sed -e "s§\${fromTime}§""$fromTime""§" | sed -e "s§\${toTime}§""$toTime""§" > temp.csv
+  cat "$databasePath" | sed -e "s#\${reason}#""$reason""#" | sed -e "s#\${date}#""$date""#" | sed -e "s#\${fromTime}#""$fromTime""#" | sed -e "s#\${toTime}#""$toTime""#" > temp.csv
   #reset databasePath tot temp.csv w substituted content
   databasePath="temp.csv";
 fi
