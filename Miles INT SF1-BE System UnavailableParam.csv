@@ -1,0 +1,2 @@
+"system","message","toEmail","ccEmail","fromEmail","text1","text2","text3","text4","text5","date","fromTime","toTime","reason"
+"Miles INT SF1-BE","System Unavailable",johan.tre@telenet.be,,"MRI-Productteam <johan_tre@hotmail.com>","The systems will be unavailable due to "," on ",". <br>All test cases and data related settings will be overwritten by the data refresh from Production. <br><br>The down time on <b>"," is estimated between "," and ","date",${fromTime},${toTime},${reason}

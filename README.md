@@ -37,10 +37,10 @@ The mail template will pick them up and include them in the mail.\
     - [Miles INT SF1-NL System Unavailable.csv](Miles%20INT%20SF1-NL%20System%20Unavailable.csv)
     - [Miles INT SF1-NL System Available Again.csv](Miles%20INT%20SF1-NL%20System%20Available%20Again.csv)
   - [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) for asking market rep of 1 market for approval or to notify requesters a deployment happened.  
-    - [Miles PROD SF1-BE Deployment.csv](Miles%20PROD%20SF1-BE%20Deployment.csv)
     - [Miles PROD SF1-BE Deployment Approval.csv](Miles%20PROD%20SF1-BE%20Deployment%20Approval.csv)
-    - [Miles PROD SF1-NL Deployment.csv](Miles%20PROD%20SF1-NL%20Deployment.csv)
+    - [Miles PROD SF1-BE Deployment.csv](Miles%20PROD%20SF1-BE%20Deployment.csv)
     - [Miles PROD SF1-NL Deployment Approval.csv](Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)
+    - [Miles PROD SF1-NL Deployment.csv](Miles%20PROD%20SF1-NL%20Deployment.csv)
   - [DeploymentMultipleMarket.html](./templates/DeploymentMultipleMarket.html) for asking market reps of both markets for approval or to notify requesters a deploy happened.
     - [Miles PROD SF1-BE-NL Deployment Approval.csv](Miles%20PROD%20SF1-BE-NL%20Deployment%20Approval.csv)
     - [Miles PROD SF1-BE-NL Deployment.csv](Miles%20PROD%20SF1-BE-NL%20Deployment.csv)
@@ -48,9 +48,9 @@ The mail template will pick them up and include them in the mail.\
 * Interactive script added to facilitate triggering mail with all database content: [milesMail.sh](milesMail.sh)\
 Usage on cli: $ bash milesMail.sh\
 The script asks you for input parameters to determine which mail you like to use. Is the mail for: 
-  - Letter code of market: <font color='red'>(BE,NL,BE-NL)</font>:
-  - Deployment Approval, Deployment, System Unavailable, System Available Again <font color='red'>(1,2,3,4)</font>:
-  - Combination of sending system (Un)Available (<font color='red'>3 or 4</font>) for multiple markets (<font color='red'>BE-NL</font>) is not possible and fed back through cli response.   
+  - Letter code of market: <font color='red'>**(BE,NL,BE-NL)**</font>:
+  - Deployment Approval, Deployment, System Unavailable, System Available Again <font color='red'>**(1,2,3,4)**</font>:
+  - Combination of sending system (Un)Available (<font color='red'>**3 or 4**</font>) for multiple markets (<font color='red'>**BE-NL**</font>) is not possible and fed back through cli response.   
 
 # File structure
 Below the file structure to understand the remaining template snippets
@@ -95,4 +95,3 @@ Opening the csv databases with Excel and saving
   * Using your commit message as a field for the templates. 
   * Having your approval reply mail triggering a pipeline. 
   * Having your mail sent when a pipeline is (successfully) finished. 
-  * Asking for mail content through cli.
