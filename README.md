@@ -20,9 +20,9 @@ And you're off to get started!
 Below some explanation how this project is to be used
 * In terminal cli
   - root of the project call: mailmerge --no-dry-run --template "path to template" --database "path to databasename"
-  - e.g. mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)
+  - e.g. **mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)**
   - Check out [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge) for extensive usage.
-  - type mailmerge --help for options.  
+  - type mailmerge --h for options.  
 * Set up your smtp mailserver in [mailmerge_server.conf](mailmerge_server.conf) 
 * Deployment mail templates like [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) and [DeploymentMultipleMarket.html](./templates/DeploymentMultipleMarket.html) have the possibility to attach an image of the test run report.\
 Include those image by leaving them in a folder with the name of your release with the **standard name "image001.png"**.\
@@ -46,11 +46,24 @@ The mail template will pick them up and include them in the mail.\
     - [Miles PROD SF1-BE-NL Deployment.csv](Miles%20PROD%20SF1-BE-NL%20Deployment.csv)
 
 * Interactive script added to facilitate triggering mail with all database content: [milesMail.sh](milesMail.sh)\
-Usage on cli: $ bash milesMail.sh\
+Usage on cli: $ **bash milesMail.sh**\
 The script asks you for input parameters to determine which mail you like to use. Is the mail for: 
   - Letter code of market: <font color='red'>**(BE,NL,BE-NL)**</font>:
-  - Deployment Approval, Deployment, System Unavailable, System Available Again <font color='red'>**(1,2,3,4)**</font>:
-  - Combination of sending system (Un)Available (<font color='red'>**3 or 4**</font>) for multiple markets (<font color='red'>**BE-NL**</font>) is not possible and fed back through cli response.   
+  - Deployment Approval<font color='red'>**(1)**</font>, Deployment<font color='red'>**(2)**</font>, System Unavailable<font color='red'>**(3)**</font>, System Available Again<font color='red'>**(4)**</font>:
+  - Combination of sending system (Un)Available (<font color='red'>**3 or 4**</font>) for multiple markets (<font color='red'>**BE-NL**</font>) is not possible and fed back through cli response.
+  - By default, the script takes **the content of the _database csv's_.**\
+  Exception for template <font color='red'>**(3)**</font> (System Unavailable):\
+  Choosing template <font color='red'>**(3)**</font> using the **-n** option the user will be asked content to parse into the target mail.\
+  Like this, it is always possible to send out a **System Unavailable** mail at any time, but with parameterized content.\
+  Content parameters:
+    - reason of the System Unavailable.
+    - date of the System Unavailable.
+    - start time of the System Unavailable.
+    - end time of the System Unavailable.\
+    \
+    Usage: $ **bash milesMail.sh -n**\
+    check out [SystemAvailability.html](./templates/SystemAvailability.html) to see where these parameters fit in.
+    - Take into account the usage of the above is by exception. The purpose is to adapt the database csv's, commit & push them, and have an automated mail sent for you. 
 
 # File structure
 Below the file structure to understand the remaining template snippets
