@@ -7,6 +7,9 @@ jobs:
   changedfiles-job:
     runs-on: [atc-ubuntu-latest]
     steps:
+      - name: setup & install python
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - name: setup & install mailmerge
         run: |
           pip install mailmerge
