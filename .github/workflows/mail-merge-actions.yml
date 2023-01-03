@@ -19,5 +19,5 @@ jobs:
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip
-      - run: pip install 'awdeorio/mailmerge'
+      - run: pip install mailmerge
         shell: bash
