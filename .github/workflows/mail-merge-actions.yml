@@ -14,8 +14,3 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
-      - name: check out mailmerge
-        uses: actions/checkout@v3
-        with:
-          repository: awdeorio/mailmerge
-        run: pip install mailmerge
