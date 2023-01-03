@@ -7,9 +7,15 @@ jobs:
   changedfiles-job:
     runs-on: [atc-ubuntu-latest]
     steps:
+      - name: check out this project
+        uses: actions/checkout@v3
       - name: setup python & install mailmerge
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pip'
-      - run: pip install mailmerge
+      - name: check out mailmerge
+        uses: actions/checkout@v3
+        with:
+          repository: awdeorio/mailmerge
+        run: pip install mailmerge
