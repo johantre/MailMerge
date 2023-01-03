@@ -7,9 +7,6 @@ jobs:
   changedfiles-job:
     runs-on: [atc-ubuntu-latest]
     steps:
-      - name: setup & install python
-        run: |
-          sudo apt-get install python3.11 -y
       - name: setup & install mailmerge
         run: |
-          sudo pip install mailmerge
+          pip install mailmerge
