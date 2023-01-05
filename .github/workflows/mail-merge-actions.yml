@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - '**/*'
+env:
+  MAILUSER: ${{ secrets.MAIL_USER }}
+  MAILPASS: ${{ secrets.MAIL_PASS }}
 jobs:
   changedfiles-job:
     runs-on: [atc-ubuntu-latest]
@@ -21,5 +24,5 @@ jobs:
           key: ${{ runner.os }}-pip
       - run: pip install mailmerge
         shell: bash
-      - run: mailmerge --no-dry-run --template templates/DeploymentSingleMarket.html --database 'Miles PROD SF1-NL Deployment Approval.csv'
+      - run: mailmerge --no-dry-run --template templates/DeploymentSingleMarket.html --database 'Miles PROD SF1-NL Deployment Approval.csv' <<< $MAILPASS
         shell: bash
