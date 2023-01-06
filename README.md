@@ -14,13 +14,13 @@ E.g.  1 template can be used in conjunction with several possible databases.\
 # Pre-req's
 * Python runtime installed (this can be done as one of your steps of your pipeline)
 * credentials of a team mailbox.  (not mandatory)
-* mailmerge installed. (see [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge)) on cli: $ pip install mailmerge\
+* mailmerge installed. (see [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge)) on cli: **$ pip install mailmerge**\
 And you're off to get started!
   
 # Manual Usage
 Below some explanation how this project is to be used
 * In terminal cli
-  - root of the project call: mailmerge --no-dry-run --template "path to template" --database "path to databasename"
+  - root of the project call: **mailmerge --no-dry-run --template "path to template" --database "path to databasename"**
   - e.g. **mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)**
   - Check out [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge) for extensive usage.
   - type mailmerge --h for options.  
