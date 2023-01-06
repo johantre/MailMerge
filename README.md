@@ -1,8 +1,9 @@
 # MailMerge
 Simple templates to send from cli, or in automation.\
-This project had built all needed templates to use with [mailmerge](https://github.com/awdeorio/mailmerge).\
+This project has built all needed templates to use with [mailmerge](https://github.com/awdeorio/mailmerge).\
 It consists out of **templates (.html)** and **databases (.csv)**.\
-Databases are the files with variable content to send.
+Templates are built for the [Jinja2](https://pypi.org/project/Jinja2/) template engine used by [mailmerge](https://github.com/awdeorio/mailmerge).\
+Databases are the files with variable content parsed into the templates to send. 
 
 In the templates the variable names are used with {{}}, e.g. {{variableName}}.\
 The **variables names** are found in the database headers.
