@@ -40,7 +40,7 @@ jobs:
           for file in "${{ steps.changed-files-eol.outputs.all_changed_files }}"; do
             printf "$file is the changed file found!\n";
             template=$(bash selectTemplate.sh "$file");
-            echo "mailmerge --no-dry-run --template templates/$template --database $file <<< $MAILPASS"; 
-            mailmerge --no-dry-run --template templates/$template --database $file <<< "$MAILPASS";
+            echo "mailmerge --no-dry-run --template templates/$template --database '$file' <<< $MAILPASS"; 
+            mailmerge --no-dry-run --template templates/$template --database "\'"$file"\'" <<< $MAILPASS;
           done
         shell: bash
