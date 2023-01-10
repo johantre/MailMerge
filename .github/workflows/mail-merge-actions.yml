@@ -24,5 +24,21 @@ jobs:
           key: ${{ runner.os }}-pip
       - run: pip install mailmerge
         shell: bash
-      - run: mailmerge --no-dry-run --template templates/DeploymentSingleMarket.html --database 'Miles PROD SF1-NL Deployment Approval.csv' <<< $MAILPASS
+      - name: Get changed files using separator
+        id: changed-files-eol
+        uses: tj-actions/changed-files@v24
+        with:
+          files: |
+            **/*.csv
+          files_ignore: |
+            **/*.html
+      - name: Use changed files as file name to figure system, template, market, database
+        id: use-changed-files
+        if: steps.changed-files-eol.outputs.any_changed == 'true'
+        run: |
+          echo "Run MailMerge with the changed files: "
+          for file in ${{ steps.changed-files-eol.outputs.all_changed_files }}; do
+            template=${selectTemplate.sh $file};
+            echo "mailmerge --no-dry-run --template $template --database $file <<< $MAILPASS";
+          done
         shell: bash
