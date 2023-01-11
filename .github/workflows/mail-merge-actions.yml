@@ -38,10 +38,10 @@ jobs:
         run: |
           echo "Run MailMerge with the changed files: "
           for file in "${{ steps.changed-files-eol.outputs.all_changed_files }}"; do
-            printf "$file is the changed file found!!\n";
-            template=$(bash lib/selectTemplate.sh "$file");
+            printf "$file was changed\n";
+            template=$(bash ./lib/selectTemplate.sh "$file");
             mailcommand="mailmerge --no-dry-run --template templates/$template --database '$file'";
-            echo "$mailcommand" <<< $MAILPASS; 
+            echo "$mailcommand"; 
             eval "$mailcommand" <<< $MAILPASS;
           done
         shell: bash
