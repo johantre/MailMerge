@@ -68,8 +68,10 @@ The script asks you for input parameters to determine which mail you like to use
     - Prereq's for this to work: see [Pre-Req's](#pre-reqs) section.
       - At the moment of writing, after installing Python through WUSS\
       installing mailmerge through **$ pip install mailmerge** with admin rights,\
-      the installation is ending up in the user profile of the current user and did nog work correctly.\
-      Most probably the installation should happen in the admin profile and add mailmerge to the path of the local machine.  Conclusion at the moment writing is that this interactive script is only working on a machine and admin profile.\As this is not the main intend of this project, this shortcoming is put to a lower priority.     
+      the installation is ending up in the user profile of the current user and did not work correctly.\
+      Most probably the installation should happen in the admin profile and add mailmerge to the path of the local machine.\
+      Conclusion at the moment writing is that this interactive script is only working on a machine and admin profile.\
+      As this is not the main intend of this project, this shortcoming is put to a lower priority.     
 
 # File structure
 Below the file structure to understand the remaining template snippets
