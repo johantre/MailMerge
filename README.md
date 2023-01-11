@@ -24,7 +24,7 @@ Below some explanation how this project is to be used
   - e.g. **mailmerge --no-dry-run --template [templates/DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) --database [Miles PROD SF1-NL Deployment Approval.csv](Miles%20PROD%20SF1-NL%20Deployment%20Approval.csv)**
   - Check out [https://github.com/awdeorio/mailmerge](https://github.com/awdeorio/mailmerge) for extensive usage.
   - type mailmerge --h for options.  
-* Set up your smtp mailserver in [mailmerge_server.conf](mailmerge_server.conf) 
+* Set up your smtp mailserver in [mailmerge_server.conf](./env/mailmerge_server.conf) 
 * Deployment mail templates like [DeploymentSingleMarket.html](./templates/DeploymentSingleMarket.html) and [DeploymentMultipleMarket.html](./templates/DeploymentMultipleMarket.html) have the possibility to attach an image of the test run report.\
 Include those image by leaving them in a folder with the name of your release with the **standard name "image001.png"**.\
 Adapt your database to refer to the right release you're mailing for.\
@@ -64,7 +64,12 @@ The script asks you for input parameters to determine which mail you like to use
     \
     Usage: $ **bash milesMail.sh -n**\
     check out [SystemAvailability.html](./templates/SystemAvailability.html) to see where these parameters fit in.
-    - Take into account the usage of the above is by exception. The purpose is to adapt the database csv's, commit & push them, and have an automated mail sent for you. 
+    - Take into account the usage of the above is by exception. The purpose is to adapt the database csv's, commit & push them, and have an automated mail sent for you.
+    - Prereq's for this to work: see [Pre-Req's](#pre-reqs) section.
+      - At the moment of writing, after installing Python through WUSS\
+      installing mailmerge through **$ pip install mailmerge** with admin rights,\
+      the installation is ending up in the user profile of the current user and did nog work correctly.\
+      Most probably the installation should happen in the admin profile and add mailmerge to the path of the local machine.  Conclusion at the moment writing is that this interactive script is only working on a machine and admin profile.\As this is not the main intend of this project, this shortcoming is put to a lower priority.     
 
 # File structure
 Below the file structure to understand the remaining template snippets
