@@ -78,7 +78,7 @@ else
 fi
 
 #Assembling it all, substitute variables if $TRACE is false
-databasePath="$systemName$marketName $databaseName.csv";
+databasePath="templatedata/$systemName$marketName $databaseName.csv";
 if [ "$templateNumber" == "3" ] && [ "$TRACE" == false ]; then
   cat "$databasePath" | sed -e "s#\${reason}#""$reason""#" | sed -e "s#\${date}#""$date""#" | sed -e "s#\${fromTime}#""$fromTime""#" | sed -e "s#\${toTime}#""$toTime""#" > temp.csv
   #reset databasePath tot temp.csv w substituted content
@@ -86,7 +86,7 @@ if [ "$templateNumber" == "3" ] && [ "$TRACE" == false ]; then
 fi
 templatePath="templates/$templateName.html";
 
-mailmerge --no-dry-run --template "$templatePath" --database "$databasePath";
+mailmerge --no-dry-run --template "$templatePath" --database "$databasePath" --config "env/mailmerge_server.conf";
 
 if [ "$templateNumber" == "3" ] && [ "$TRACE" == false ]; then
   rm temp.csv;
