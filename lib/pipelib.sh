@@ -6,8 +6,8 @@ function initJiraCredentials() {
   if test -z "$JIRAUSER"
   then
     echo "Falling back to $jiraSecretProps for credentials"
-    JIRAUSER=$(getProp 'jira.user' "$jiraSecretProps")
-    JIRAPASS=$(getProp 'jira.pass' "$jiraSecretProps")
+    JIRAUSER=$(getPropValue 'jira.user' "$jiraSecretProps")
+    JIRAPASS=$(getPropValue 'jira.pass' "$jiraSecretProps")
   fi
 }
 
@@ -22,10 +22,8 @@ function createJiraRelease() {
 
 function updateJiraProps() {
   jiraReleaseName=$1
-  jiraReleaseId=$2
-  jiraReleaseDate=$3
 
-  setProp "$jiraReleaseName" "$JIRAHOSTNAME$jiraReleaseId" "$jiraReleaseURLProps"
-  setProp "$jiraReleaseName" "false" "$jiraReleaseReleasedProps"
-  setProp "$jiraReleaseName" "$jiraReleaseDate" "$jiraReleaseReleasedProps"
+  setPropValue "$jiraReleaseName" "$JIRAHOSTNAME$jiraReleaseId" "$jiraReleaseURLProps"
+  setPropValue "$jiraReleaseName" "false" "$jiraReleaseReleasedProps"
+  setPropValue "$jiraReleaseName" "$jiraReleaseDate" "$jiraReleaseReleasedProps"
 }

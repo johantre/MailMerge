@@ -1,12 +1,13 @@
 function init() {
   prodProps="$DIR/env/prod.update.properties"
   jiraProps="$DIR/env/prod.jira.properties"
-  jiraSecretProps="$DIR/env/prod.jira.secret.properties"
   jiraReleaseJson="$DIR/payload/releases.json"
+  jiraSecretProps="$DIR/env/prod.jira.secret.properties"
+  jiraReleaseDateProps="$DIR/env/prod.jira.releases.releasedate.properties"
 
-  JIRAPROJECT=$(getProp "jira.project.name" "$jiraProps")
-  JIRAHOSTNAME=$(getProp 'jira.host' "$jiraProps")
-  JIRAPROJECTID=$(getProp "jira.project.id" "$jiraProps")
+  JIRAPROJECT=$(getPropValue "jira.project.name" "$jiraProps")
+  JIRAHOSTNAME=$(getPropValue 'jira.host' "$jiraProps")
+  JIRAPROJECTID=$(getPropValue "jira.project.id" "$jiraProps")
 
   export JIRAUSER;
   export JIRAPASS;
@@ -18,18 +19,18 @@ function init() {
 
   shopt -s expand_aliases;
 
-  alias jq="source $(getProp "update.jq.command" $prodProps)";
-  echo "alias done! $(getProp "update.jq.command" $prodProps)"
+  alias jq="source $(getPropValue "update.jq.command" $prodProps)";
+  echo "alias done! $(getPropValue "update.jq.command" $prodProps)"
 }
 
-function getProp() {
+function getPropValue() {
   propKey=$1
   propFile=$2
 
   grep --no-messages "$propKey" "$propFile"|cut -d'=' -f2||echo "::error::Variable ${propKey} not set" && exit 0 ;
 }
 
-function setProp() {
+function setPropValue() {
   propKey="$1"
   propValue="$2"
   propFile="$3"
@@ -48,7 +49,7 @@ function updatePropKey() {
   newPropKey="$2"
   propFile="$3"
 
-  propValue=$(getProp "$propKey" "$propFile")
+  propValue=$(getPropValue "$propKey" "$propFile")
 
   if ! grep -R "^[#]*\s*${propKey}=.*" "$propFile" > /dev/null; then
     echo "KEY ${propKey} not found"
@@ -58,7 +59,7 @@ function updatePropKey() {
   fi
 }
 
-function getFieldValue() {
+function getCSVFieldValue() {
   fieldCount=$1;
   file=$2;
 
@@ -70,17 +71,24 @@ function getFieldValue() {
   done < "$file";
 }
 
-function replaceFieldCSV() {
+function replaceCSVField() {
   fieldCount=$1;
   toReplaceBy=$2;
   file=$3;
 
-  toBeReplaced=$(getFieldValue "$fieldCount" "$file");
+  toBeReplaced=$(getCSVFieldValue "$fieldCount" "$file");
 
   sed -i "2 s/${toBeReplaced}/\"${toReplaceBy}\"/g" "$file";
 }
 
 function getJiraReleaseName() {
+  searchReleaseName=$1;
+  fieldToGet="name"
+
+  getJiraReleaseJsonField "$searchReleaseName" "$fieldToGet";
+}
+
+function newJiraRelease() {
   searchReleaseName=$1;
   fieldToGet="name"
 
@@ -111,16 +119,23 @@ function updateJiraReleaseDescription() {
   updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" "$newReleaseDescription"
 }
 
-function archiveJiraRelease() {
+function releaseJiraRelease() {
   searchReleaseName=$1;
-  fieldToUpdate="archived";
+  fieldToUpdate="released";
 
   updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" true
 }
 
-function releaseJiraRelease() {
+function unReleaseJiraRelease() {
   searchReleaseName=$1;
   fieldToUpdate="released";
+
+  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" 'false'
+}
+
+function archiveJiraRelease() {
+  searchReleaseName=$1;
+  fieldToUpdate="archived";
 
   updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" true
 }
@@ -132,18 +147,11 @@ function unArchiveJiraRelease() {
   updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" false
 }
 
-function unReleaseJiraRelease() {
-  searchReleaseName=$1;
-  fieldToUpdate="released";
-
-  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" 'false'
-}
-
 function getJiraReleaseJsonField() {
   searchReleaseName=$1;
   fieldToGet=$2;
 
-  jqCmd=$(getProp update.jq.command "$prodProps");
+  jqCmd=$(getPropValue update.jq.command "$prodProps");
 
   cat "$jiraReleaseJson" | "$jqCmd" --arg releasetoget "$searchReleaseName" \
                                     --arg fieldtoget "$fieldToGet" \
@@ -155,7 +163,7 @@ function updateJiraReleaseJsonField() {
   fieldToUpdate=$2;
   fieldValue=$3;
 
-  jqCmd=$(getProp "update.jq.command" "$prodProps")
+  jqCmd=$(getPropValue "update.jq.command" "$prodProps")
 
   "$jqCmd" --arg name "$searchReleaseName" \
            --arg field "$fieldToUpdate" \
