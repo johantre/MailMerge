@@ -28,7 +28,7 @@ while true; do
         1|2|3|4)
             if  [ "$marketName" == "BE-NL" ] && ([ "$templateNumber" == "3" ] || [ "$templateNumber" == "4" ]); then
               read -r -p "$(echo -e "Invalid market-template combination: $RED$marketName$NC cannot be combined with templateNumber $RED$templateNumber$NC. Try again? $RED(Y/N)$NC:")" tryAgain;
-              if [ "$tryAgain" != "Y" ]; then exit 0; fi;
+              if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
             else
               templateMultiplier="Single";
               if [ "$marketName" == "BE-NL" ]; then
@@ -61,11 +61,11 @@ while true; do
             fi ;;
         *)
           read -r -p "$(echo -e "Invalid input: $RED$templateNumber$NC Usage: type respective number:Deployment Approval$RED(1)$NC, Deployment$RED(2)$NC, System Unavailable$RED(3)$NC, System Available Again$RED(4)$NC:. Try again? $RED(Y/N)$NC:")" tryAgain;
-          if [ "$tryAgain" != "Y" ]; then exit 0; fi ;;
+          if [[ "$tryAgain" != [yY] ]]; then exit 0; fi ;;
       esac;;
     *)
       read -r -p "$(echo -e "Invalid input: $RED$marketName$NC Usage: $RED(BE,NL,BE-NL)$NC. Try again? $RED(Y/N)$NC:")" tryAgain;
-      if [ "$tryAgain" != "Y" ]; then exit 0; fi ;;
+      if [[ "$tryAgain" != [yY] ]]; then exit 0; fi ;;
   esac
 done
 
