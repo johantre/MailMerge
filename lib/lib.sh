@@ -249,6 +249,8 @@ function gitPush() {
 }
 
 function gitCommit() {
-  echo "git Commit";
-  git commit -a -m "CLI commit performed!";
+  caller=$1;
+  gitUser=$(whoami);
+  echo "git Commit from $caller by $gitUser";
+  git commit -a -m "CLI commit performed from $caller by $gitUser";
 }
