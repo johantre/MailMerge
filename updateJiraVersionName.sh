@@ -20,11 +20,9 @@ while true; do
     read -r -p "$(echo -e "Type your new release name : ")" newJiraReleaseName;
 
     updateJiraReleaseName "$jiraReleaseName" "$newJiraReleaseName";
-    exit 0;
+    break;
   fi
 done
-
-# Git stage?
 
 gitCommit
 

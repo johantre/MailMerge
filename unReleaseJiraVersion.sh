@@ -18,11 +18,9 @@ while true; do
     if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
   else
     unReleaseJiraRelease "$jiraReleaseName";
-    exit 0;
+    break;
   fi
 done
-
-# Git stage?
 
 gitCommit
 

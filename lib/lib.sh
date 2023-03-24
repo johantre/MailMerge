@@ -239,16 +239,16 @@ function updateJiraReleaseJsonField() {
 }
 
 function gitPull() {
-  echo "git Pull"
-#  git pull;
+  echo "git Pull";
+  git pull mail-merge master;
 }
 
 function gitPush() {
-  echo "git Push"
-#  git push;
+  echo "git Push";
+  git push mail-merge;
 }
 
 function gitCommit() {
-  echo "git Commit"
-#  git commit;
+  echo "git Commit";
+  git commit -a -m "CLI commit performed!";
 }

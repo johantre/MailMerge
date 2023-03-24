@@ -38,8 +38,6 @@ while true; do
   fi ;
 done
 
-# Git stage?
-
 gitCommit
 
 gitPush
