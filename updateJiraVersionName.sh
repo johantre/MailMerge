@@ -24,7 +24,7 @@ while true; do
   fi
 done
 
-gitCommit
+gitCommit "$0"
 
 gitPush
 
