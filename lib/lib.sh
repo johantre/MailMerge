@@ -2,8 +2,8 @@ function init() {
   prodProps="$DIR/env/prod.update.properties"
   jiraReleaseJson="$DIR/payload/releases.json"
 
-  export jiraReleaseJson;
   export prodProps;
+  export jiraReleaseJson;
 
   shopt -s expand_aliases;
 
@@ -253,4 +253,32 @@ function gitCommit() {
   gitUser=$(whoami);
   echo "git Commit from $caller by $gitUser";
   git commit -a -m "CLI commit performed from $caller by $gitUser";
+}
+
+function getJsonChanged() {
+  toLine="$1"
+
+  while read -r line
+  do
+    closingBraceFound=$(echo "$line" | grep "}")
+
+    if [[ -n $closingBraceFound ]];
+    then
+      fromLine="$toLine"
+      break;
+    fi;
+    ((toLine++))
+  done <<< "$(tail +"$toLine" "$jiraReleaseJson")"
+
+  while read -r line
+  do
+    openingBraceFound=$(echo "$line" | grep "{")
+    if [[ -n $openingBraceFound ]];
+    then
+     break;
+    fi;
+    ((fromLine--))
+  done <<< "$(head -n "$toLine" "$jiraReleaseJson" | tac )"
+
+  head -n "$toLine" "$jiraReleaseJson" | tail +"$fromLine" | sed 's#[}],#}#'
 }
