@@ -8,7 +8,7 @@ gitPull
 # (deployment pipe does the rest)
 while true; do
 
-  read -r -p "$(echo -e "Type your jira release name (e.g. MY Release W03) : ")" jiraReleaseName;
+  read -r -p "$(echo -e "Type your new jira release name (e.g. MY Release W03) : ")" jiraReleaseName;
 
   existingReleaseName=$(getJiraReleaseName "$jiraReleaseName") ;
   existingStagedReleaseDate=$(getPropValue "$jiraReleaseName" "$jiraReleaseDateProps") ;
@@ -19,7 +19,7 @@ while true; do
     then
       while true; do
 
-        read -r -p "$(echo -e "Type your jira release date in the right format. (YYY-MM-DD e.g. 2023-12-01) : ")" jiraReleaseDate;
+        read -r -p "$(echo -e "Type your jira release date in the right format. (YYYY-MM-DD e.g. 2023-12-01) : ")" jiraReleaseDate;
 
         if jiraReleaseDate=$(date -d "$jiraReleaseDate" +'%Y'-'%m'-'%d');
         then

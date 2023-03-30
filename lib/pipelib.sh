@@ -1,4 +1,4 @@
-DIR=$(dirname $0)
+DIR=$(dirname "$0")
 source "$DIR/lib/lib.sh"
 init
 

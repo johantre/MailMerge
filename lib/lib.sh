@@ -23,8 +23,8 @@ function initJiraCredentials() {
   jiraSecretProps="$DIR/env/prod.jira.secret.properties"
   jiraReleaseDateProps="$DIR/env/prod.jira.releases.releasedate.properties"
 
-  JIRAPROJECT=$(getPropValue "jira.project.name" "$jiraProps")
   JIRAHOSTNAME=$(getPropValue 'jira.host' "$jiraProps")
+  JIRAPROJECT=$(getPropValue "jira.project.name" "$jiraProps")
   JIRAPROJECTID=$(getPropValue "jira.project.id" "$jiraProps")
 
   export JIRAUSER;
@@ -34,59 +34,14 @@ function initJiraCredentials() {
   export JIRAPROJECTID;
 }
 
-
+# CRUD Property files
+# ===================
 function updateJiraProps() {
   jiraReleaseName=$1
 
   setPropValue "$jiraReleaseName" "$JIRAHOSTNAME$jiraReleaseId" "$jiraReleaseURLProps"
   setPropValue "$jiraReleaseName" "false" "$jiraReleaseReleasedProps"
   setPropValue "$jiraReleaseName" "$jiraReleaseDate" "$jiraReleaseReleasedProps"
-}
-
-function createJiraRelease() {
-
-  jiraReleasePayloadTemplate='{ "description": "", "name": "", "archived": true, "released": false, "releaseDate": "", "project": "", "projectId": "" }';
-
-  echo "template : $jiraReleasePayloadTemplate"
-  echo "name : $jiraReleaseName"
-  echo "date : $jiraReleaseDate"
-  echo "project : $JIRAPROJECT"
-  echo "projectId $JIRAPROJECTID"
-
-  jqCmd=$(getPropValue update.jq.command "$prodProps");
-
-  jiraReleasePayload=$(echo "$jiraReleasePayloadTemplate" \
-    | "$jqCmd" -c --arg relName "$jiraReleaseName" '.name = $relName' \
-    | "$jqCmd" -c --arg relDate "$jiraReleaseDate" '.releaseDate = $relDate' \
-    | "$jqCmd" -c --arg relProj "$JIRAPROJECT" '.project = $relProj' \
-    | "$jqCmd" -c --arg relProjId "$JIRAPROJECTID" '.projectId = $relProjId' );
-
-  echo "$JIRAHOSTNAME $JIRAUSER $JIRAPASS $jiraReleasePayload"
-
-  jsonResponse=$(postJiraRelease "$JIRAHOSTNAME" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
-  #jsonResponse='{"self": "https://atc.bmwgroup.net/jira/rest/api/2/version/243832", "id": "666","description": "the number of the beast","name": "Lou-Cypher","archived": "fal" }'
-  echo "And the response is : $jsonResponse"
-
-  if echo "$jsonResponse" | grep -q '"errorMessages"'; then
-    echo "$jsonResponse";
-    exit 1;
-  else
-    "$jqCmd" --arg newrelease "$jsonResponse" '. += [$newrelease]' ./payload/testreleases.json
-
-    jiraReleaseId=$(echo "$jsonResponse" | "$jqCmd" -c -r '.id');
-  #  updateJiraProps "$jiraReleaseName" "$jiraReleaseId" "$jiraReleaseDate"
-  fi
-
-}
-
-
-function postJiraRelease() {
-  jiraURL=$1
-  jiraUser=$2
-  jiraPass=$3
-  jiraPayload=$4
-
-  curl --request POST --url "$jiraURL" --user "$jiraUser:$jiraPass" --header 'Accept: application/json' --header 'Content-Type: application/json' --data "$jiraPayload";
 }
 
 function getPropValue() {
@@ -125,6 +80,8 @@ function updatePropKey() {
   fi
 }
 
+# CRUD CSV files
+# ==============
 function getCSVFieldValue() {
   fieldCount=$1;
   file=$2;
@@ -147,6 +104,35 @@ function replaceCSVField() {
   sed -i "2 s/${toBeReplaced}/\"${toReplaceBy}\"/g" "$file";
 }
 
+# CRUD JSON files
+# ===============
+function getJiraReleaseJsonField() {
+  searchReleaseName=$1;
+  fieldToGet=$2;
+
+  jqCmd=$(getPropValue update.jq.command "$prodProps");
+
+  cat "$jiraReleaseJson" | "$jqCmd" --arg releasetoget "$searchReleaseName" \
+                                    --arg fieldtoget "$fieldToGet" \
+                                    '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' ;
+}
+
+function updateJiraReleaseJsonField() {
+  searchReleaseName=$1;
+  fieldToUpdate=$2;
+  fieldValue=$3;
+
+  jqCmd=$(getPropValue "update.jq.command" "$prodProps")
+
+  "$jqCmd" --arg name "$searchReleaseName" \
+           --arg field "$fieldToUpdate" \
+           --arg value "$fieldValue" \
+           '(.[] | select(.name == $name))[$field] |= $value' \
+           "$jiraReleaseJson" > ./payload/newreleases.json && mv ./payload/newreleases.json "$jiraReleaseJson";
+}
+
+# functional calls to manipulate that needs pipeline to pickup
+# ============================================================
 function getJiraReleaseName() {
   searchReleaseName=$1;
   fieldToGet="name"
@@ -213,31 +199,6 @@ function unArchiveJiraRelease() {
   updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" false
 }
 
-function getJiraReleaseJsonField() {
-  searchReleaseName=$1;
-  fieldToGet=$2;
-
-  jqCmd=$(getPropValue update.jq.command "$prodProps");
-
-  cat "$jiraReleaseJson" | "$jqCmd" --arg releasetoget "$searchReleaseName" \
-                                    --arg fieldtoget "$fieldToGet" \
-                                    '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' ;
-}
-
-function updateJiraReleaseJsonField() {
-  searchReleaseName=$1;
-  fieldToUpdate=$2;
-  fieldValue=$3;
-
-  jqCmd=$(getPropValue "update.jq.command" "$prodProps")
-
-  "$jqCmd" --arg name "$searchReleaseName" \
-           --arg field "$fieldToUpdate" \
-           --arg value "$fieldValue" \
-           '(.[] | select(.name == $name))[$field] |= $value' \
-           "$jiraReleaseJson" > ./payload/newreleases.json && mv ./payload/newreleases.json "$jiraReleaseJson";
-}
-
 function gitPull() {
   echo "git Pull";
   git pull mail-merge master;
@@ -253,6 +214,56 @@ function gitCommit() {
   gitUser=$(whoami);
   echo "git Commit from $caller by $gitUser";
   git commit -a -m "CLI commit performed from $caller by $gitUser";
+}
+
+# bare calls to manipulate Jira and called from within pipeline
+# =============================================================
+function createJiraRelease() {
+
+  jiraReleasePayloadTemplate='{ "description": "", "name": "", "archived": true, "released": false, "releaseDate": "", "project": "", "projectId": "" }';
+
+  echo "template : $jiraReleasePayloadTemplate"
+  echo "name : $jiraReleaseName"
+  echo "date : $jiraReleaseDate"
+  echo "project : $JIRAPROJECT"
+  echo "projectId $JIRAPROJECTID"
+
+  jqCmd=$(getPropValue update.jq.command "$prodProps");
+
+  # shellcheck disable=SC2016
+  jiraReleasePayload=$(echo "$jiraReleasePayloadTemplate" \
+    | "$jqCmd" -c --arg relName "$jiraReleaseName" '.name = $relName' \
+    | "$jqCmd" -c --arg relDate "$jiraReleaseDate" '.releaseDate = $relDate' \
+    | "$jqCmd" -c --arg relProj "$JIRAPROJECT" '.project = $relProj' \
+    | "$jqCmd" -c --arg relProjId "$JIRAPROJECTID" '.projectId = $relProjId' );
+
+  echo "$JIRAHOSTNAME $JIRAUSER $JIRAPASS $jiraReleasePayload"
+
+  jsonResponse=$(postJiraRelease "$JIRAHOSTNAME" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
+  #jsonResponse='{"self": "https://atc.bmwgroup.net/jira/rest/api/2/version/243832", "id": "666","description": "the number of the beast","name": "Lou-Cypher","archived": "fal" }'
+  echo "And the response is : $jsonResponse"
+
+  if echo "$jsonResponse" | grep -q '"errorMessages"'; then
+    echo "$jsonResponse";
+    exit 1;
+  else
+    # maybe not better to extract that completely from Jira?
+    # update releaseURL property file
+    # clean releaseDateProp file after creation
+    "$jqCmd" --arg newrelease "$jsonResponse" '. += [$newrelease]' ./payload/testreleases.json
+
+    jiraReleaseId=$(echo "$jsonResponse" | "$jqCmd" -c -r '.id');
+  #  updateJiraProps "$jiraReleaseName" "$jiraReleaseId" "$jiraReleaseDate"
+  fi
+}
+
+function postJiraRelease() {
+  jiraURL=$1
+  jiraUser=$2
+  jiraPass=$3
+  jiraPayload=$4
+
+  curl --request POST --url "$jiraURL" --user "$jiraUser:$jiraPass" --header 'Accept: application/json' --header 'Content-Type: application/json' --data "$jiraPayload";
 }
 
 function getJsonChanged() {
