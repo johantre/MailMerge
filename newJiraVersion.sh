@@ -1,5 +1,6 @@
 DIR=$(dirname "$0")
 source "$DIR/lib/lib.sh"
+
 init
 
 gitPull
@@ -13,6 +14,9 @@ while true; do
   existingReleaseName=$(getJiraReleaseName "$jiraReleaseName") ;
   existingStagedReleaseDate=$(getPropValue "$jiraReleaseName" "$jiraReleaseDateProps") ;
 
+  echo "existing date = $existingStagedReleaseDate"
+  echo "existing release = $existingReleaseName"
+
   if [ -z "$existingStagedReleaseDate" ];
   then
     if [ -z "$existingReleaseName" ];
@@ -23,6 +27,10 @@ while true; do
 
         if jiraReleaseDate=$(date -d "$jiraReleaseDate" +'%Y'-'%m'-'%d');
         then
+          echo "existing release date = $existingStagedReleaseDate"
+          echo "existing release name = $existingReleaseName"
+          echo "existing jiraReleaseDateProps = $jiraReleaseDateProps"
+
           setPropValue "$jiraReleaseName" "$jiraReleaseDate" "$jiraReleaseDateProps";
           break;
         else read -r -p "$(echo -e "Incorrect date format for: $jiraReleaseDate. Format is YYYY-MM-DD. (e.g. 2023-12-01)  Try again? (Y/N) : ")" tryAgain;
@@ -38,7 +46,7 @@ while true; do
   fi ;
 done
 
-gitCommit "$0"
+#gitCommit "$0"
 
-gitPush
+#gitPush
 

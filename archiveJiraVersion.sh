@@ -1,5 +1,6 @@
 DIR=$(dirname "$0")
 source "$DIR/lib/lib.sh"
+
 init
 
 gitPull
@@ -22,7 +23,7 @@ while true; do
   fi
 done
 
-gitCommit "$0"
+#gitCommit "$0"
 
-gitPush
+#gitPush
 

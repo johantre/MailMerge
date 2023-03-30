@@ -1,9 +1,11 @@
 function init() {
   prodProps="$DIR/env/prod.update.properties"
   jiraReleaseJson="$DIR/payload/releases.json"
+  jiraReleaseDateProps="$DIR/env/prod.jira.releases.releasedate.properties"
 
   export prodProps;
   export jiraReleaseJson;
+  export jiraReleaseDateProps;
 
   shopt -s expand_aliases;
 
@@ -32,6 +34,7 @@ function initJiraCredentials() {
   export JIRAPROJECT;
   export JIRAHOSTNAME;
   export JIRAPROJECTID;
+  export jiraReleaseDateProps
 }
 
 # CRUD Property files
