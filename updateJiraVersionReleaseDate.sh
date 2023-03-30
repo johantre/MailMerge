@@ -26,6 +26,7 @@ while true; do
         updateJiraReleaseDate "$jiraReleaseName" "$newJiraReleaseDate";
 
         gitCommit "$0"
+
         gitPush
         exit 0;
       else
