@@ -14,7 +14,7 @@
     "description": "iGrade release scope",
     "name": "2022 FNC Q1 BE EP13",
     "archived": false,
-    "released": true,
+    "released": false,
     "releaseDate": "2025-07-03",
     "userReleaseDate": "13. Jul 22",
     "projectId": 32311
