@@ -41,6 +41,7 @@ function updateJiraURLProp() {
 # Bare calls to manipulate Jira and called from within pipeline
 # =============================================================
 function createJiraReleases() {
+  echo "the release date props file: -->$jiraReleaseDateProps<--"
   unset lineCount
   while read -r line; do
     jiraReleaseName=$(echo "$line" |cut -d'=' -f1 ||echo "::error::Nothing found in ${jiraReleaseDateProps}" exit 1 ;)
@@ -50,6 +51,7 @@ function createJiraReleases() {
     createJiraRelease "$jiraReleaseName" "$jiraReleaseDate"
   done < "$jiraReleaseDateProps";
 
+  echo "And the line count is : -->$lineCount<--"
   #cleanup requested releases
   sed -i "1,$lineCount d" "$jiraReleaseDateProps";
   #reflush releases payload file
