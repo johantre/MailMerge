@@ -2,8 +2,8 @@ name: jira-version-actions
 on:
   push:
     paths:
-      - '/env/prod.jira.releases.releasedate.properties'
-      - '/payload/releases.json'
+      - 'env/prod.jira.releases.releasedate.properties'
+      - 'payload/releases.json'
 env:
   MAILUSER: ${{ secrets.MAIL_USER }}
   MAILPASS: ${{ secrets.MAIL_PASS }}
@@ -17,17 +17,17 @@ jobs:
         id: changed-new-releases-properties
         uses: tj-actions/changed-files@v24
         with:
-          files: /env/prod.jira.releases.releasedate.properties
+          files: env/prod.jira.releases.releasedate.properties
       - name: Run step if releasedate.properties has changed
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
-        run: echo '/actions/server/createRequestedVersions.sh'
+        run: echo 'actions/server/createRequestedVersions.sh'
         shell: bash
       - name: Get changed files using separator
         id: changed-updated-releases-json
         uses: tj-actions/changed-files@v24
         with:
-          files: /payload/releases.json
+          files: payload/releases.json
       - name: Run step if releases.json has changed
         if: steps.changed-updated-releases-json.outputs.any_changed == 'true'
-        run: echo '/actions/server/updateChangedVersion.sh'
+        run: echo 'actions/server/updateChangedVersion.sh'
         shell: bash
