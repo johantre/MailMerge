@@ -1,4 +1,4 @@
-name: mail-merge-actions
+name: jira-version-actions
 on:
   push:
     paths:
@@ -7,6 +7,8 @@ on:
 env:
   MAILUSER: ${{ secrets.MAIL_USER }}
   MAILPASS: ${{ secrets.MAIL_PASS }}
+  JIRAUSER: ${{ secrets.JIRA_USER }}
+  JIRAPASS: ${{ secrets.JIRA_PASS }}
 jobs:
   changedfiles-job:
     runs-on: [atc-ubuntu-latest]
