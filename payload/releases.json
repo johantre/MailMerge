@@ -3641,5 +3641,16 @@
     "overdue": false,
     "userReleaseDate": "12. Dec 25",
     "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/283928",
+    "id": "283928",
+    "name": "Client triggered GH Jira Release numero dos",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2023-10-10",
+    "overdue": false,
+    "userReleaseDate": "10. Oct 23",
+    "projectId": 32311
   }
 ]
