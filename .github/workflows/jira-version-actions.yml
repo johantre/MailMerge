@@ -13,6 +13,10 @@ jobs:
   changedfiles-job:
     runs-on: [atc-ubuntu-latest]
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Get changed files using separator
         id: changed-new-releases-properties
         uses: tj-actions/changed-files@v24
