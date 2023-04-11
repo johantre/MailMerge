@@ -5,8 +5,6 @@ on:
       - 'env/prod.jira.releases.releasedate.properties'
       - 'payload/releases.json'
 env:
-  MAILUSER: ${{ secrets.MAIL_USER }}
-  MAILPASS: ${{ secrets.MAIL_PASS }}
   JIRAUSER: ${{ secrets.JIRA_USER }}
   JIRAPASS: ${{ secrets.JIRA_PASS }}
 jobs:
@@ -37,5 +35,5 @@ jobs:
           files: payload/releases.json
       - name: Run step if payload/releases.json has changed -> Update existing Jira version!
         if: steps.changed-updated-releases-json.outputs.any_changed == 'true'
-        run: echo 'actions/server/updateChangedVersion.sh'
+        run: bash actions/server/updateChangedVersion.sh
         shell: bash
