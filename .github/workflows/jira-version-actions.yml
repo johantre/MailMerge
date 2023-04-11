@@ -22,16 +22,16 @@ jobs:
         uses: tj-actions/changed-files@v24
         with:
           files: env/prod.jira.releases.releasedate.properties
-      - name: Run step if releasedate.properties has changed
+      - name: Run step if env/prod.jira.releases.releasedate.properties has changed -> New Jira version!
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
-        run: echo 'actions/server/createRequestedVersions.sh'
+        run: actions/server/createRequestedVersions.sh
         shell: bash
       - name: Get changed files using separator
         id: changed-updated-releases-json
         uses: tj-actions/changed-files@v24
         with:
           files: payload/releases.json
-      - name: Run step if releases.json has changed
+      - name: Run step if payload/releases.json has changed -> Update existing Jira version!
         if: steps.changed-updated-releases-json.outputs.any_changed == 'true'
         run: echo 'actions/server/updateChangedVersion.sh'
         shell: bash
