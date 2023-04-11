@@ -2,7 +2,7 @@ name: mail-merge-actions
 on:
   push:
     paths:
-      - '**/*'
+      - '**/*.xml'
 env:
   MAILUSER: ${{ secrets.MAIL_USER }}
   MAILPASS: ${{ secrets.MAIL_PASS }}

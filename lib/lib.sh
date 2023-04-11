@@ -4,12 +4,9 @@ function init() {
   jiraReleaseJsonNew="$DIR/../../payload/releasesnew.json"
   jiraReleaseDateProps="$DIR/../../env/prod.jira.releases.releasedate.properties"
 
-  shopt -s expand_aliases;
+  jqCmd=$(getPropValue update.jq.command "$prodProps");
 
-  alias jq="source $(getPropValue "update.jq.command" "$prodProps")";
-  echo "alias done! $(getPropValue "update.jq.command" "$prodProps")"
-
-  export jq;
+  export jqCmd;
   export prodProps;
   export jiraReleaseJson;
   export jiraReleaseJsonNew;
@@ -18,14 +15,6 @@ function init() {
 
 # CRUD Property files
 # ===================
-function updateJiraProps() {
-  jiraReleaseName=$1
-
-  setPropValue "$jiraReleaseName" "$JIRAHOSTNAME$jiraReleaseId" "$jiraReleaseURLProps"
-  setPropValue "$jiraReleaseName" "false" "$jiraReleaseReleasedProps"
-  setPropValue "$jiraReleaseName" "$jiraReleaseDate" "$jiraReleaseReleasedProps"
-}
-
 function getPropValue() {
   propKey=$1
   propFile=$2
@@ -92,8 +81,6 @@ function getJiraReleaseJsonField() {
   searchReleaseName=$1;
   fieldToGet=$2;
 
-  jqCmd=$(getPropValue update.jq.command "$prodProps");
-
   cat "$jiraReleaseJson" | "$jqCmd" --arg releasetoget "$searchReleaseName" \
                                     --arg fieldtoget "$fieldToGet" \
                                     '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' ;
@@ -103,8 +90,6 @@ function updateJiraReleaseJsonField() {
   searchReleaseName=$1;
   fieldToUpdate=$2;
   fieldValue=$3;
-
-  jqCmd=$(getPropValue "update.jq.command" "$prodProps")
 
   "$jqCmd" --arg name "$searchReleaseName" \
            --arg field "$fieldToUpdate" \
@@ -157,7 +142,7 @@ function releaseJiraRelease() {
   searchReleaseName=$1;
   fieldToUpdate="released";
 
-  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" true
+  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" 'true'
 }
 
 function unReleaseJiraRelease() {
@@ -171,14 +156,14 @@ function archiveJiraRelease() {
   searchReleaseName=$1;
   fieldToUpdate="archived";
 
-  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" true
+  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" 'true'
 }
 
 function unArchiveJiraRelease() {
   searchReleaseName=$1;
   fieldToUpdate="archived";
 
-  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" false
+  updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" 'false'
 }
 
 function gitPull() {
