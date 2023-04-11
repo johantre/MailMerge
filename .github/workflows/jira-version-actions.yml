@@ -35,5 +35,5 @@ jobs:
           files: payload/releases.json
       - name: Run step if payload/releases.json has changed -> Update existing Jira version!
         if: steps.changed-updated-releases-json.outputs.any_changed == 'true'
-        run: bash actions/server/updateChangedVersion.sh
+        run: bash ./actions/server/updateChangedVersion.sh
         shell: bash
