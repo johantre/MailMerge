@@ -42,7 +42,7 @@ function updateJiraURLProp() {
 # =============================================================
 function createJiraReleases() {
   echo "the release date props file: -->$jiraReleaseDateProps<--"
-  unset lineCount
+  lineCount=0;
   while read -r line; do
     jiraReleaseName=$(echo "$line" |cut -d'=' -f1 ||echo "::error::Nothing found in ${jiraReleaseDateProps}" exit 1 ;)
     jiraReleaseDate=$(echo "$line" |cut -d'=' -f2 ||echo "::error::Nothing found in ${jiraReleaseDateProps}" exit 1 ;)
