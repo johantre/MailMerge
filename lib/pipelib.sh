@@ -62,7 +62,7 @@ function createJiraRelease() {
   jiraReleaseName="$1"
   jiraReleaseDate="$2"
 
-  jiraReleasePayloadTemplate='{ "description": "", "name": "", "archived": false, "released": false, "releaseDate": "", "project": "", "projectId": "" }';
+  jiraReleasePayloadTemplate='{ "description": " ", "name": "", "archived": false, "released": false, "releaseDate": "", "project": "", "projectId": "" }';
 
   # shellcheck disable=SC2016
   jiraReleasePayload=$(echo "$jiraReleasePayloadTemplate" \
@@ -113,6 +113,8 @@ function updateJiraRelease() {
     exit 1;
   else
     updateJiraURLProp "$name" "$relId"; #relName could have been changed as well!
+    #reflush releases payload file
+    getAllJiraReleases "$jiraRestVersionsURL" "$JIRAUSER" "$JIRAPASS" | "$jqCmd" . > "$jiraReleaseJson";
   fi
 }
 
