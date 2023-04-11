@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Get changed files using separator
+      - name: Get changed file env/prod.jira.releases.releasedate.properties
         id: changed-new-releases-properties
         uses: tj-actions/changed-files@v24
         with:
@@ -26,7 +26,7 @@ jobs:
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
         run: bash ./actions/server/createRequestedVersions.sh
         shell: bash
-      - name: Get changed files using separator
+      - name: Get changed file payload/releases.json
         id: changed-updated-releases-json
         uses: tj-actions/changed-files@v24
         with:
