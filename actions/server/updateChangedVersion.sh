@@ -14,3 +14,7 @@ changedJson=$(getJsonChanged)
 
 updateJiraRelease "$changedJson"
 
+gitCommit
+
+getPush
+

@@ -22,7 +22,6 @@ jobs:
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
         run: echo '/actions/server/createRequestedVersions.sh'
         shell: bash
-
       - name: Get changed files using separator
         id: changed-updated-releases-json
         uses: tj-actions/changed-files@v24
