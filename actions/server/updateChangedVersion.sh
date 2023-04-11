@@ -16,5 +16,5 @@ updateJiraRelease "$changedJson"
 
 gitCommit
 
-getPush
+gitPush
 

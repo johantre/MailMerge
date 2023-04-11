@@ -14,5 +14,5 @@ createJiraReleases
 
 gitCommit
 
-getPush
+gitPush
 

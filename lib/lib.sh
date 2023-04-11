@@ -179,6 +179,10 @@ function gitPush() {
 function gitCommit() {
   caller=$1;
   gitUser=$(whoami);
+
+  git config user.email "$gitUser@bmw.com"
+  git config user.name "$gitUser"
+
   echo "git Commit from $caller by $gitUser";
   git commit -a -m "CLI commit performed from $caller by $gitUser";
 }

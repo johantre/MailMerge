@@ -25,7 +25,7 @@ while true; do
   fi
 done
 
-#gitCommit "$0"
+gitCommit "$0"
 
-#gitPush
+gitPush
 

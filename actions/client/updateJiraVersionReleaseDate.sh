@@ -27,9 +27,9 @@ while true; do
       then
         updateJiraReleaseDate "$jiraReleaseName" "$newJiraReleaseDate";
 
-        #gitCommit "$0"
+        gitCommit "$0"
 
-        #gitPush
+        gitPush
         exit 0;
       else
         read -r -p "$(echo -e "Incorrect date format for: $newJiraReleaseDate. Format is YYYY-MM-DD. (e.g. 2023-12-01)  Try again? (Y/N) : ")" tryAgain;
