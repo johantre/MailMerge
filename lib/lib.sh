@@ -168,20 +168,23 @@ function unArchiveJiraRelease() {
 
 function gitPull() {
   echo "git Pull";
-  git pull mail-merge master;
+  caller=$1;
+  gitUser=$(whoami);
+
+  git config --global user.email "$gitUser@bmw.com"
+  git config --global user.name "$gitUser"
+
+  git pull;
 }
 
 function gitPush() {
   echo "git Push";
-  git push mail-merge;
+  git push;
 }
 
 function gitCommit() {
   caller=$1;
   gitUser=$(whoami);
-
-  git config user.email "$gitUser@bmw.com"
-  git config user.name "$gitUser"
 
   echo "git Commit from $caller by $gitUser";
   git commit -a -m "CLI commit performed from $caller by $gitUser";
