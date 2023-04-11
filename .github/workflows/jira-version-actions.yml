@@ -24,7 +24,7 @@ jobs:
           files: env/prod.jira.releases.releasedate.properties
       - name: Run step if env/prod.jira.releases.releasedate.properties has changed -> New Jira version!
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
-        run: actions/server/createRequestedVersions.sh
+        run: bash ./actions/server/createRequestedVersions.sh
         shell: bash
       - name: Get changed files using separator
         id: changed-updated-releases-json
