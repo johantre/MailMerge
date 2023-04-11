@@ -3634,7 +3634,7 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/284327",
     "id": "284327",
-    "name": "Client GH triggered release",
+    "name": "OMG Release",
     "archived": "false",
     "released": "false",
     "releaseDate": "2023-12-12",
