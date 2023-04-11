@@ -1,6 +1,6 @@
 function initJiraCredentials() {
   jiraProps="$DIR/../../env/prod.jira.properties"
-  jiraSecretProps="$DIR/../../env/prod.jira.secret.properties"
+  jiraSecretProps="$DIR/../../env/local.jira.secret.properties"
   jiraReleaseURLProps="$DIR/../../env/prod.jira.releases.url.properties"
   jiraReleaseDateProps="$DIR/../../env/prod.jira.releases.releasedate.properties"
 
@@ -14,7 +14,7 @@ function initJiraCredentials() {
 
   if test -z "$JIRAUSER"
   then
-    echo "Falling back to $jiraSecretProps for credentials"
+    echo "Falling back to local $jiraSecretProps for credentials"
     JIRAUSER=$(getPropValue 'jira.user' "$jiraSecretProps")
     JIRAPASS=$(getPropValue 'jira.pass' "$jiraSecretProps")
   fi

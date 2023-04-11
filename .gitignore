@@ -1,3 +1,4 @@
 .idea/
 Sandbox/
-env/prod.jira.secret.properties
+env/local.jira.secret.properties
+env/local.update.properties

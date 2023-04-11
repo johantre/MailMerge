@@ -1,10 +1,17 @@
 function init() {
   prodProps="$DIR/../../env/prod.update.properties"
+  localProps="$DIR/../../env/local.update.properties"
   jiraReleaseJson="$DIR/../../payload/releases.json"
   jiraReleaseJsonNew="$DIR/../../payload/releasesnew.json"
   jiraReleaseDateProps="$DIR/../../env/prod.jira.releases.releasedate.properties"
 
-  jqCmd=$(getPropValue update.jq.command "$prodProps");
+  jqCmd=$(getPropValue update.jq.command "$localProps");
+
+  if test -z "$jqCmd"
+  then
+    jqCmd=$(getPropValue update.jq.command "$prodProps");
+    echo "Falling back to remote $prodProps for jqCmd: $jqCmd"
+  fi
 
   export jqCmd;
   export prodProps;
