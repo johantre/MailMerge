@@ -10,7 +10,7 @@ env:
   JIRAUSER: ${{ secrets.JIRA_USER }}
   JIRAPASS: ${{ secrets.JIRA_PASS }}
 jobs:
-  changedfiles-job:
+  changedfiles-new-releases-job:
     runs-on: [atc-ubuntu-latest]
     steps:
       - name: Checkout repository
