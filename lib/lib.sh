@@ -182,9 +182,6 @@ function gitPull() {
   git config --global user.name "$gitUser"
 
   git pull;
-
-  git config --global --unset user.email
-  git config --global --unset user.name
 }
 
 function gitPush() {
@@ -208,4 +205,7 @@ function gitCommit() {
 
   echo "git Commit from $caller by $gitUser";
   git commit -a -m "CLI commit performed from $caller by $gitUser";
+
+  git config --global --unset user.email
+  git config --global --unset user.name
 }
