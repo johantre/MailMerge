@@ -2595,9 +2595,8 @@
     "id": "269181",
     "name": "2023 W14 Release BE",
     "archived": false,
-    "released": false,
+    "released": true,
     "releaseDate": "2023-04-05",
-    "overdue": false,
     "userReleaseDate": "05. Apr 23",
     "projectId": 32311
   },
@@ -2606,9 +2605,8 @@
     "id": "269422",
     "name": "2023 W14 Release NL",
     "archived": false,
-    "released": false,
+    "released": true,
     "releaseDate": "2023-04-05",
-    "overdue": false,
     "userReleaseDate": "05. Apr 23",
     "projectId": 32311
   },
@@ -2682,7 +2680,7 @@
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/269185",
     "id": "269185",
     "name": "2023 W18 Release BE",
-    "archived": true,
+    "archived": false,
     "released": false,
     "releaseDate": "2023-05-03",
     "overdue": false,
@@ -2693,7 +2691,7 @@
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/269426",
     "id": "269426",
     "name": "2023 W18 Release NL",
-    "archived": true,
+    "archived": false,
     "released": false,
     "releaseDate": "2023-05-03",
     "overdue": false,
@@ -3631,6 +3629,17 @@
     "overdue": false,
     "userStartDate": "23. Mar 23",
     "userReleaseDate": "15. Apr 23",
+    "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/284119",
+    "id": "284119",
+    "name": "Dit is mijn release",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2028-12-12",
+    "overdue": false,
+    "userReleaseDate": "12. Dec 28",
     "projectId": 32311
   }
 ]
