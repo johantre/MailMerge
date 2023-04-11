@@ -26,6 +26,10 @@ jobs:
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
         run: bash ./actions/server/createRequestedVersions.sh
         shell: bash
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Get changed file payload/releases.json
         id: changed-updated-releases-json
         uses: tj-actions/changed-files@v24
