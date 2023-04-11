@@ -26,7 +26,7 @@ jobs:
         if: steps.changed-new-releases-properties.outputs.any_changed == 'true'
         run: bash ./actions/server/createRequestedVersions.sh
         shell: bash
-      - name: Checkout repository
+      - name: Checkout repository again, if pref steps caused commits
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
