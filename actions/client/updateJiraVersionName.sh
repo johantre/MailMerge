@@ -5,7 +5,7 @@ export DIR
 
 init
 
-gitPull
+gitPullClient
 
 # update jira release date properties w new Version name
 # (deployment pipe does the rest)
@@ -29,5 +29,5 @@ done
 
 gitCommit "$0"
 
-gitPush
+gitPushClient
 

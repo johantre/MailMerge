@@ -5,7 +5,7 @@ export DIR
 
 init
 
-gitPull
+gitPullClient
 
 # add jira release & releaseDate to jira release date properties
 # (deployment pipe does the rest)
@@ -43,5 +43,5 @@ done
 
 gitCommit "$0"
 
-gitPush
+gitPushClient
 

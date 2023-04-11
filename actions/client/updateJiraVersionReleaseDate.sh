@@ -5,7 +5,7 @@ export DIR
 
 init
 
-gitPull
+gitPullClient
 
 # Update releaseDate to properties
 # (deployment pipe does the rest)
@@ -29,7 +29,7 @@ while true; do
 
         gitCommit "$0"
 
-        gitPush
+        gitPushClient
         exit 0;
       else
         read -r -p "$(echo -e "Incorrect date format for: $newJiraReleaseDate. Format is YYYY-MM-DD. (e.g. 2023-12-01)  Try again? (Y/N) : ")" tryAgain;

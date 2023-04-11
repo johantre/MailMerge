@@ -182,11 +182,24 @@ function gitPull() {
   git config --global user.name "$gitUser"
 
   git pull;
+
+  git config --global --unset user.email
+  git config --global --unset user.name
 }
 
 function gitPush() {
   echo "git Push";
   git push;
+}
+
+function gitPullClient() {
+  echo "git Pull";
+  git pull mail-merge;
+}
+
+function gitPushClient() {
+  echo "git Push";
+  git push mail-merge;
 }
 
 function gitCommit() {

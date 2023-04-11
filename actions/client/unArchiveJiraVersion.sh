@@ -5,7 +5,7 @@ export DIR
 
 init
 
-gitPull
+gitPullClient
 
 # update jira release archived field
 # (deployment pipe does the rest)
@@ -27,5 +27,5 @@ done
 
 gitCommit "$0"
 
-gitPush
+gitPushClient
 
