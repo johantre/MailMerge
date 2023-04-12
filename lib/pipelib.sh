@@ -76,8 +76,8 @@ function createJiraRelease() {
   jsonResponse=$(postJiraRelease "$jiraRestURL" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
   echo "Version created : $jsonResponse";
 
-  jiraErrors=$(grep -q -c '"errorMessages"' <<< "$jsonResponse");
-  shellErrors=$(grep -q -c '"error"' <<< "$jsonResponse");
+  jiraErrors=$(grep -c '"errorMessages"' <<< "$jsonResponse");
+  shellErrors=$(grep -c '"error"' <<< "$jsonResponse");
 
   if [[ ( $jiraErrors ) || ( $shellErrors  ) ]]; then
     echo "$jsonResponse";
@@ -92,8 +92,8 @@ function updateJiraRelease() {
   changedJsonPayload=$(getJsonChanged);
   echo "changedJsonPayload from getJsonChanged = $changedJsonPayload";
 
-  shellErrors=$(grep -q -c '"error"' <<< "$jsonResponse");
-  echo "shell error count: $shellErrors";
+  shellErrors=$(grep -c '"error"' <<< "$jsonResponse");
+  echo "shell error count: -->$shellErrors<--";
 
   if [[ ( $shellErrors  ) ]]; then
     echo "$changedJsonPayload";
@@ -119,8 +119,11 @@ function updateJiraRelease() {
     jsonResponse=$(putJiraRelease "$jiraRestURL$relId" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
     echo "Version updated : $jsonResponse";
 
-    jiraErrors=$(grep -q -c '"errorMessages"' <<< "$jsonResponse");
-    shellErrors=$(grep -q -c '"error"' <<< "$jsonResponse");
+    jiraErrors=$(grep -c '"errorMessages"' <<< "$jsonResponse");
+    shellErrors=$(grep -c '"error"' <<< "$jsonResponse");
+
+    echo "jiraErrors : -->$jiraErrors<--"
+    echo "shellErrors : -->$shellErrors<--"
 
     if [[ ( $jiraErrors ) || ( $shellErrors  ) ]]; then
       echo "$jsonResponse";
