@@ -162,9 +162,9 @@ function getAllJiraReleases() {
 function getJsonChanged() {
   toLine=$(git diff -U0 HEAD^ -- "$jiraReleaseJson" | grep -o '\+.* @@' | sed -En 's/\+(.*) @@/\1/p');
 
-  multiLineCommitException=$(grep -q -c ',' <<< "$toLine");
+  multiLineCommitException=$(grep -c ',' <<< "$toLine");
 
-  echo "multiLineCommitException = $multiLineCommitException"
+  echo "multiLineCommitException = -->$multiLineCommitException<--"
 
   if [[ ( $multiLineCommitException  ) ]]; then
     echo "error : toLine contains multi line commit! Exiting... (toLine = $toLine)";
