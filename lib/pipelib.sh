@@ -162,6 +162,10 @@ function getAllJiraReleases() {
 function getJsonChanged() {
   toLine=$(git diff -U0 HEAD^ -- "$jiraReleaseJson" | grep -o '\+.* @@' | sed -En 's/\+(.*) @@/\1/p');
 
+  tailToLineResponse="$(tail +"$toLine" "$jiraReleaseJson")"
+
+  echo "This is the tail to line response : $tailToLineResponse"
+
   while read -r line
   do
     closingBraceFound=$(echo "$line" | grep "}")
@@ -172,7 +176,10 @@ function getJsonChanged() {
       break;
     fi;
     ((toLine++))
-  done <<< "$(tail +"$toLine" "$jiraReleaseJson")"
+  done <<< "$tailToLineResponse"
+
+  headFromLineResponse="$(head -n "$toLine" "$jiraReleaseJson" | tac )"
+  echo "This is the head from line response : $headFromLineResponse"
 
   while read -r line
   do
@@ -182,7 +189,7 @@ function getJsonChanged() {
      break;
     fi;
     ((fromLine--))
-  done <<< "$(head -n "$toLine" "$jiraReleaseJson" | tac )"
+  done <<< "$headFromLineResponse"
 
   head -n "$toLine" "$jiraReleaseJson" | tail +"$fromLine" | sed 's#[}],#}#'
 }
