@@ -10,9 +10,7 @@ gitPull
 
 initJiraCredentials
 
-changedJson=$(getJsonChanged)
-
-updateJiraRelease "$changedJson"
+updateJiraRelease
 
 gitCommit
 
