@@ -161,10 +161,12 @@ function getAllJiraReleases() {
 
 function getJsonChanged() {
   toLine=$(git diff -U0 HEAD^ -- "$jiraReleaseJson" | grep -o '\+.* @@' | sed -En 's/\+(.*) @@/\1/p');
+  echo "from within getJsonChanged. Tail args: toLine = ->$toLine<-"
+  echo "from within getJsonChanged. Tail args: jiraReleaseJson = ->$jiraReleaseJson<-"
 
   tailToLineResponse="$(tail +"$toLine" "$jiraReleaseJson")"
 
-  echo "This is the tail to line response : $tailToLineResponse"
+  echo "from within getJsonChanged. tailToLineResponse : ->$tailToLineResponse<-"
 
   while read -r line
   do
