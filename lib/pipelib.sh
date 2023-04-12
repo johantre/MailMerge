@@ -161,37 +161,40 @@ function getAllJiraReleases() {
 
 function getJsonChanged() {
   toLine=$(git diff -U0 HEAD^ -- "$jiraReleaseJson" | grep -o '\+.* @@' | sed -En 's/\+(.*) @@/\1/p');
-  echo "from within getJsonChanged. Tail args: toLine = ->$toLine<-"
-  echo "from within getJsonChanged. Tail args: jiraReleaseJson = ->$jiraReleaseJson<-"
 
-  tailToLineResponse="$(tail +"$toLine" "$jiraReleaseJson")"
+  multiLineCommitException=$(grep -q -c ',' <<< "$toLine");
 
-  echo "from within getJsonChanged. tailToLineResponse : ->$tailToLineResponse<-"
+  if [[ ( $multiLineCommitException  ) ]]; then
+    echo "error : toLine contains multi line commit! Exiting... (toLine = $toLine)";
+    exit 1;
+  else
+    tailToLineResponse="$(tail +"$toLine" "$jiraReleaseJson")"
 
-  while read -r line
-  do
-    closingBraceFound=$(echo "$line" | grep "}")
+    while read -r line
+    do
+      closingBraceFound=$(echo "$line" | grep "}")
 
-    if [[ -n $closingBraceFound ]];
-    then
-      fromLine="$toLine"
-      break;
-    fi;
-    ((toLine++))
-  done <<< "$tailToLineResponse"
+      if [[ -n $closingBraceFound ]];
+      then
+        fromLine="$toLine"
+        break;
+      fi;
+      ((toLine++))
+    done <<< "$tailToLineResponse"
 
-  headFromLineResponse="$(head -n "$toLine" "$jiraReleaseJson" | tac )"
-  echo "This is the head from line response : $headFromLineResponse"
+    headFromLineResponse="$(head -n "$toLine" "$jiraReleaseJson" | tac )"
+    echo "This is the head from line response : $headFromLineResponse"
 
-  while read -r line
-  do
-    openingBraceFound=$(echo "$line" | grep "{")
-    if [[ -n $openingBraceFound ]];
-    then
-     break;
-    fi;
-    ((fromLine--))
-  done <<< "$headFromLineResponse"
+    while read -r line
+    do
+      openingBraceFound=$(echo "$line" | grep "{")
+      if [[ -n $openingBraceFound ]];
+      then
+       break;
+      fi;
+      ((fromLine--))
+    done <<< "$headFromLineResponse"
 
-  head -n "$toLine" "$jiraReleaseJson" | tail +"$fromLine" | sed 's#[}],#}#'
+    head -n "$toLine" "$jiraReleaseJson" | tail +"$fromLine" | sed 's#[}],#}#'
+  fi
 }
