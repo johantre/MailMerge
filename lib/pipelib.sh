@@ -89,9 +89,11 @@ function createJiraRelease() {
 }
 
 function updateJiraRelease() {
-  changedJsonPayload=$(getJsonChanged)
+  changedJsonPayload=$(getJsonChanged);
+  echo "changedJsonPayload from getJsonChanged = $changedJsonPayload";
 
   shellErrors=$(grep -q -c '"error"' <<< "$jsonResponse");
+  echo "shell error count: $shellErrors";
 
   if [[ ( $shellErrors  ) ]]; then
     echo "$changedJsonPayload";
