@@ -162,7 +162,7 @@ function getJsonChanged() {
 
   multiLineCommitException=$(grep -c ',' <<< "$toLine");
 
-  if [[ ( $multiLineCommitException  ) ]]; then
+  if [[ $multiLineCommitException ]]; then
     echo "error : toLine contains multi line commit! Exiting... (toLine = -->$toLine<--, multiLineCommitException = -->$multiLineCommitException<--)";
     exit 1;
   else
