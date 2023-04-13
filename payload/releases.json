@@ -3632,8 +3632,9 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/284467",
     "id": "284467",
+    "description": "null",
     "name": "The new GH triggered release",
-    "archived": "true",
+    "archived": true,
     "released": false,
     "releaseDate": "2025-01-05",
     "overdue": false,
