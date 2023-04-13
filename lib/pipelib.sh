@@ -89,6 +89,7 @@ function createJiraRelease() {
 
 function updateJiraRelease() {
   changedJsonPayload=$(getJsonChanged);
+  echo "changedJsonPayload : -->$changedJsonPayload<--"
 
   jiraReleasePayloadTemplate='{ "description": "", "name": "", "archived": "", "released": "", "releaseDate": "" }';
 
@@ -99,6 +100,13 @@ function updateJiraRelease() {
   archived=$("$jqCmd" -r '.archived' <<< "$changedJsonPayload");
   released=$("$jqCmd" -r '.released' <<< "$changedJsonPayload");
 
+  echo "relId       -->$relId<--"
+  echo "name        -->$name<--"
+  echo "releaseDate -->$releaseDate<--"
+  echo "description -->$description<--"
+  echo "archived    -->$archived<--"
+  echo "released    -->$released<--"
+
   # shellcheck disable=SC2016
   jiraReleasePayload=$(echo "$jiraReleasePayloadTemplate" \
     | "$jqCmd" -c --arg name "$name" '.name = $name' \
@@ -108,7 +116,7 @@ function updateJiraRelease() {
     | "$jqCmd" -c --arg released "$released" '.released = $released' );
 
   jsonResponse=$(putJiraRelease "$jiraRestURL$relId" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
-  echo "Version updated : $jsonResponse";
+  echo "jira version updated : $jsonResponse";
 
   jiraErrors=$(grep -c 'errorMessages' <<< "$jsonResponse");
 
