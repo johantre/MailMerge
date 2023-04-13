@@ -3634,7 +3634,7 @@
     "id": "284467",
     "description": "null",
     "name": "The new GH triggered release",
-    "archived": true,
+    "archived": "false",
     "released": "true",
     "releaseDate": "2025-01-05",
     "overdue": false,
