@@ -120,7 +120,7 @@ function updateJiraRelease() {
 
   jiraErrors=$(grep -c 'errorMessages' <<< "$jsonResponse");
 
-  if [[ $jiraErrors ]]; then
+  if (( jiraErrors != 0 )); then
     echo "$jsonResponse";
     exit 1;
   else
