@@ -2615,9 +2615,8 @@
     "id": "269182",
     "name": "2023 W15 Release BE",
     "archived": false,
-    "released": false,
+    "released": true,
     "releaseDate": "2023-04-12",
-    "overdue": false,
     "userReleaseDate": "12. Apr 23",
     "projectId": 32311
   },
@@ -2626,9 +2625,8 @@
     "id": "269423",
     "name": "2023 W15 Release NL",
     "archived": false,
-    "released": false,
+    "released": true,
     "releaseDate": "2023-04-12",
-    "overdue": false,
     "userReleaseDate": "12. Apr 23",
     "projectId": 32311
   },
@@ -3628,7 +3626,7 @@
     "releaseDate": "2023-04-15",
     "overdue": false,
     "userStartDate": "23. Mar 23",
-    "userReleaseDate": "15. Apr 23",
+    "userReleaseDate": "15. Apr 25",
     "projectId": 32311
   }
 ]
