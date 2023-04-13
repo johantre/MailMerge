@@ -78,8 +78,8 @@ function createJiraRelease() {
 
   jiraErrors=$(grep -c 'errorMessages' <<< "$jsonResponse");
 
-  if [[ $jiraErrors ]]; then
-    echo "$jsonResponse";
+  if (( jiraErrors != 0 )); then
+    echo "Jira response containing errorMessages : -->$jsonResponse<--";
     exit 1;
   else
     jiraReleaseId=$(echo "$jsonResponse" | "$jqCmd" -c -r '.id');
@@ -121,7 +121,7 @@ function updateJiraRelease() {
   jiraErrors=$(grep -c 'errorMessages' <<< "$jsonResponse");
 
   if (( jiraErrors != 0 )); then
-    echo "$jsonResponse";
+    echo "Jira response containing errorMessages : -->$jsonResponse<--";
     exit 1;
   else
     updateJiraURLProp "$name" "$relId"; #relName could have been changed as well!
