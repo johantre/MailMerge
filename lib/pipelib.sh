@@ -159,11 +159,11 @@ function getAllJiraReleases() {
 #function should NEVER echo any output apart from exiting stage
 function getJsonChanged() {
   toLine=$(git diff -U0 HEAD^ -- "$jiraReleaseJson" | grep -o '\+.* @@' | sed -En 's/\+(.*) @@/\1/p');
-
   multiLineCommitException=$(grep -c ',' <<< "$toLine");
 
-  if [[ $multiLineCommitException ]]; then
-    echo "error : toLine contains multi line commit! Exiting... (toLine = -->$toLine<--, multiLineCommitException = -->$multiLineCommitException<--)";
+  if  test -z "$toLine" || (( toLine == 0 )) || test -z "$multiLineCommitException" || (( multiLineCommitException == 0 ))
+  then
+    echo "error : toLine contains none line commit or multi line commit! Exiting... (toLine = -->$toLine<--, multiLineCommitException = -->$multiLineCommitException<--)";
     exit 1;
   else
     tailToLineResponse="$(tail +"$toLine" "$jiraReleaseJson")"
