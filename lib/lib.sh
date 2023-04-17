@@ -190,12 +190,12 @@ function gitPush() {
 }
 
 function gitPullClient() {
-  echo "git Pull";
+  echo "git Pull mail-merge";
   git pull mail-merge;
 }
 
 function gitPushClient() {
-  echo "git Push";
+  echo "git Push mail-merge";
   git push mail-merge;
 }
 
