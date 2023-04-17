@@ -91,7 +91,9 @@ function updateJiraRelease() {
   changedJsonPayload=$(getJsonChanged);
   echo "changedJsonPayload : -->$changedJsonPayload<--"
 
-  jsonChangedErrors=$(grep -c 'error : toLine contains none line commit or multi line commit! Exiting...' <<< "$jsonResponse");
+  jsonChangedErrors=$(grep -c 'error : toLine contains none line commit or multi line commit! Exiting...' <<< "$changedJsonPayload");
+
+  echo "jsonChangedErrors : -->$jsonChangedErrors<--"
 
   if  test -z "$jsonChangedErrors" || (( jsonChangedErrors != 0 ))
   then
