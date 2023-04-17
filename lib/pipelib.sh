@@ -91,42 +91,50 @@ function updateJiraRelease() {
   changedJsonPayload=$(getJsonChanged);
   echo "changedJsonPayload : -->$changedJsonPayload<--"
 
-  jiraReleasePayloadTemplate='{ "description": "", "name": "", "archived": "", "released": "", "releaseDate": "" }';
+  jsonChangedErrors=$(grep -c 'error : toLine contains none line commit or multi line commit! Exiting...' <<< "$jsonResponse");
 
-  relId=$("$jqCmd" -r '.id' <<< "$changedJsonPayload");
-  name=$("$jqCmd" -r '.name' <<< "$changedJsonPayload");
-  releaseDate=$("$jqCmd" -r '.releaseDate' <<< "$changedJsonPayload");
-  description=$("$jqCmd" -r '.description' <<< "$changedJsonPayload");
-  archived=$("$jqCmd" -r '.archived' <<< "$changedJsonPayload");
-  released=$("$jqCmd" -r '.released' <<< "$changedJsonPayload");
-
-  echo "relId       -->$relId<--"
-  echo "name        -->$name<--"
-  echo "releaseDate -->$releaseDate<--"
-  echo "description -->$description<--"
-  echo "archived    -->$archived<--"
-  echo "released    -->$released<--"
-
-  # shellcheck disable=SC2016
-  jiraReleasePayload=$(echo "$jiraReleasePayloadTemplate" \
-    | "$jqCmd" -c --arg name "$name" '.name = $name' \
-    | "$jqCmd" -c --arg releaseDate "$releaseDate" '.releaseDate = $releaseDate' \
-    | "$jqCmd" -c --arg description "$description" '.description = $description' \
-    | "$jqCmd" -c --arg archived "$archived" '.archived = $archived' \
-    | "$jqCmd" -c --arg released "$released" '.released = $released' );
-
-  jsonResponse=$(putJiraRelease "$jiraRestURL$relId" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
-  echo "jira version updated : $jsonResponse";
-
-  jiraErrors=$(grep -c 'errorMessages' <<< "$jsonResponse");
-
-  if (( jiraErrors != 0 )); then
-    echo "Jira response containing errorMessages : -->$jsonResponse<--";
+  if  test -z "$jsonChangedErrors" || (( jsonChangedErrors != 0 ))
+  then
+    echo "getJsonChanged contains errors : -->$changedJsonPayload<--";
     exit 1;
   else
-    updateJiraURLProp "$name" "$relId"; #relName could have been changed as well!
-    #reflush releases payload file
-    getAllJiraReleases "$jiraRestVersionsURL" "$JIRAUSER" "$JIRAPASS" | "$jqCmd" . > "$jiraReleaseJson";
+    jiraReleasePayloadTemplate='{ "description": "", "name": "", "archived": "", "released": "", "releaseDate": "" }';
+
+    relId=$("$jqCmd" -r '.id' <<< "$changedJsonPayload");
+    name=$("$jqCmd" -r '.name' <<< "$changedJsonPayload");
+    releaseDate=$("$jqCmd" -r '.releaseDate' <<< "$changedJsonPayload");
+    description=$("$jqCmd" -r '.description' <<< "$changedJsonPayload");
+    archived=$("$jqCmd" -r '.archived' <<< "$changedJsonPayload");
+    released=$("$jqCmd" -r '.released' <<< "$changedJsonPayload");
+
+    echo "relId       -->$relId<--"
+    echo "name        -->$name<--"
+    echo "releaseDate -->$releaseDate<--"
+    echo "description -->$description<--"
+    echo "archived    -->$archived<--"
+    echo "released    -->$released<--"
+
+    # shellcheck disable=SC2016
+    jiraReleasePayload=$(echo "$jiraReleasePayloadTemplate" \
+      | "$jqCmd" -c --arg name "$name" '.name = $name' \
+      | "$jqCmd" -c --arg releaseDate "$releaseDate" '.releaseDate = $releaseDate' \
+      | "$jqCmd" -c --arg description "$description" '.description = $description' \
+      | "$jqCmd" -c --arg archived "$archived" '.archived = $archived' \
+      | "$jqCmd" -c --arg released "$released" '.released = $released' );
+
+    jsonResponse=$(putJiraRelease "$jiraRestURL$relId" "$JIRAUSER" "$JIRAPASS" "$jiraReleasePayload");
+    echo "jira version updated : $jsonResponse";
+
+    jiraErrors=$(grep -c 'errorMessages' <<< "$jsonResponse");
+
+    if (( jiraErrors != 0 )); then
+      echo "Jira response containing errorMessages : -->$jsonResponse<--";
+      exit 1;
+    else
+      updateJiraURLProp "$name" "$relId"; #relName could have been changed as well!
+      #reflush releases payload file
+      getAllJiraReleases "$jiraRestVersionsURL" "$JIRAUSER" "$JIRAPASS" | "$jqCmd" . > "$jiraReleaseJson";
+    fi
   fi
 }
 
