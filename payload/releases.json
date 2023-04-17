@@ -3625,5 +3625,16 @@
     "userStartDate": "23. Mar 23",
     "userReleaseDate": "15. Apr 23",
     "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/284186",
+    "id": "284186",
+    "name": "Another GH triggered version",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2023-12-12",
+    "overdue": false,
+    "userReleaseDate": "12. Dec 23",
+    "projectId": 32311
   }
 ]
