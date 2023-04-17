@@ -6,13 +6,13 @@ export DIR
 
 init
 
-gitPull
+gitPullClient
 
 initJiraCredentials
 
 createJiraReleases
 
-gitCommit
+gitCommitClient
 
 gitPush
 
