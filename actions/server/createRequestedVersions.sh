@@ -12,7 +12,7 @@ initJiraCredentials
 
 createJiraReleases
 
-gitCommit "$0"
+gitCommit "$0" "previous client commit"
 
 gitPushClient
 
