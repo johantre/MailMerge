@@ -191,12 +191,12 @@ function gitPush() {
 
 function gitPullClient() {
   echo "git Pull mail-merge";
-  git pull mail-merge;
+  git pull mail-merge master;
 }
 
 function gitPushClient() {
   echo "git Push mail-merge";
-  git push mail-merge;
+  git push mail-merge master;
 }
 
 function gitCommit() {
