@@ -6,7 +6,7 @@ export DIR
 
 init
 
-gitPullClient
+gitPull
 
 initJiraCredentials
 
@@ -14,5 +14,5 @@ createJiraReleases
 
 gitCommit "$0" "previous client commit"
 
-gitPushClient
+gitPush
 
