@@ -27,6 +27,10 @@ while true; do
         if jiraReleaseDate=$(date -d "$jiraReleaseDate" +'%Y'-'%m'-'%d');
         then
           setPropValue "$jiraReleaseName" "$jiraReleaseDate" "$jiraReleaseDateProps";
+
+          gitCommit "$0" "$jiraReleaseName"
+
+          gitPushClient
           break;
         else read -r -p "$(echo -e "Incorrect date format for: $jiraReleaseDate. Format is YYYY-MM-DD. (e.g. 2023-12-01)  Try again? (Y/N) : ")" tryAgain;
           if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
@@ -40,8 +44,3 @@ while true; do
     if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
   fi ;
 done
-
-gitCommit "$0"
-
-gitPushClient
-

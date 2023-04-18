@@ -201,10 +201,11 @@ function gitPushClient() {
 
 function gitCommit() {
   caller=$1;
+  releaseName=$2
   gitUser=$(whoami);
 
   echo "git Commit from $caller by $gitUser";
-  git commit -a -m "CLI commit performed from $caller by $gitUser";
+  git commit -a -m "CLI commit performed from $caller by $gitUser for $releaseName";
 
   git config --global --unset user.email
   git config --global --unset user.name
