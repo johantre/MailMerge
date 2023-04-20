@@ -3628,7 +3628,7 @@
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/284977",
     "id": "284977",
     "description": "Describe the description",
-    "name": "My GH triggered version",
+    "name": "My GH triggered version 2",
     "archived": true,
     "released": true,
     "releaseDate": "2023-10-10",
