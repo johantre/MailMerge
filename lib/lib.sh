@@ -115,13 +115,6 @@ function getJiraReleaseName() {
 
   getJiraReleaseJsonField "$searchReleaseName" "$fieldToGet";
 }
-# This one cannot be right
-function newJiraRelease() {
-  searchReleaseName=$1;
-  fieldToGet="name"
-
-  getJiraReleaseJsonField "$searchReleaseName" "$fieldToGet";
-}
 
 function updateJiraReleaseName() {
   searchReleaseName=$1;
