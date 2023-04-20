@@ -88,6 +88,7 @@ function getJiraReleaseJsonField() {
   searchReleaseName=$1;
   fieldToGet=$2;
 
+  # shellcheck disable=SC2016
   cat "$jiraReleaseJson" | "$jqCmd" --arg releasetoget "$searchReleaseName" \
                                     --arg fieldtoget "$fieldToGet" \
                                     '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' ;
@@ -98,6 +99,7 @@ function updateJiraReleaseJsonField() {
   fieldToUpdate=$2;
   fieldValue=$3;
 
+  # shellcheck disable=SC2016
   "$jqCmd" --arg name "$searchReleaseName" \
            --arg field "$fieldToUpdate" \
            --arg value "$fieldValue" \
@@ -105,7 +107,7 @@ function updateJiraReleaseJsonField() {
            "$jiraReleaseJson" > "$jiraReleaseJsonNew" && mv "$jiraReleaseJsonNew" "$jiraReleaseJson";
 }
 
-# functional calls to manipulate that needs pipeline to pickup
+# functional calls to manipulate what pipeline needs to pickup
 # ============================================================
 function getJiraReleaseName() {
   searchReleaseName=$1;
@@ -173,6 +175,8 @@ function unArchiveJiraRelease() {
   updateJiraReleaseJsonField "$searchReleaseName" "$fieldToUpdate" 'false'
 }
 
+# Git calls for client & server to pull, push, commit
+# ===================================================
 function gitPull() {
   echo "git Pull";
   caller=$1;
