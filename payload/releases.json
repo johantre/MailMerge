@@ -3629,7 +3629,7 @@
     "id": "284977",
     "description": "Describe the description",
     "name": "My GH triggered version",
-    "archived": "true",
+    "archived": true,
     "released": true,
     "releaseDate": "2023-10-10",
     "userReleaseDate": "10. Oct 23",
