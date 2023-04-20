@@ -89,9 +89,9 @@ function getJiraReleaseJsonField() {
   fieldToGet=$2;
 
   # shellcheck disable=SC2016
-  cat "$jiraReleaseJson" | "$jqCmd" --arg releasetoget "$searchReleaseName" \
-                                    --arg fieldtoget "$fieldToGet" \
-                                    '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' ;
+  "$jqCmd" --arg releasetoget "$searchReleaseName" \
+                    --arg fieldtoget "$fieldToGet" \
+                    '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' < "$jiraReleaseJson" ;
 }
 
 function updateJiraReleaseJsonField() {
