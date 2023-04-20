@@ -36,14 +36,14 @@ function setPropValue() {
 
   if ! grep -R "^[#]*\s*${propKey}=.*" "$propFile" > /dev/null; then
     if ! grep "=${propValue}" "$propFile" > /dev/null; then
-      echo "SETTING key because existing value ${propKey}=${propValue}";
-      sed -i "s|.*=${propValue}|$propKey=$propValue|" "$propFile"
-    else
       echo "APPENDING because new key: ${propKey}=${propValue}"
       echo "$propKey=$propValue" >> "$propFile"
+    else
+      echo "SETTING key because existing value: ${propKey}=${propValue}";
+      sed -i "s|.*=${propValue}|$propKey=$propValue|" "$propFile"
     fi
   else
-    echo "SETTING value because existing ${propKey}=${propValue}"
+    echo "SETTING value because existing key: ${propKey}=${propValue}"
     sed -i "s|^[#]*\s*${propKey}=.*|$propKey=$propValue|" "$propFile"
   fi
 }
