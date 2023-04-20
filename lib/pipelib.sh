@@ -35,7 +35,7 @@ function updateJiraURLProp() {
   jiraReleaseName=$1
   jiraReleaseId=$2
 
-  setPropValue "$jiraReleaseName" "$jiraVersionURL$jiraReleaseId" "$jiraReleaseURLProps"
+  setPropValue "$jiraReleaseName" "$jiraVersionURL$jiraReleaseId" "$jiraReleaseURLProps";
 }
 
 # Bare calls to manipulate Jira and called from within pipeline
