@@ -3627,6 +3627,7 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/284977",
     "id": "284977",
+    "description": "null",
     "name": "My GH triggered updated version",
     "archived": false,
     "released": false,
