@@ -3630,9 +3630,8 @@
     "description": "Describe the description",
     "name": "My GH triggered version",
     "archived": false,
-    "released": "true",
+    "released": true,
     "releaseDate": "2023-10-10",
-    "overdue": false,
     "userReleaseDate": "10. Oct 23",
     "projectId": 32311
   }
