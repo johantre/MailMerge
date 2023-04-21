@@ -108,7 +108,7 @@ function updateJiraReleaseJsonField() {
   "$jqCmd" --arg name "$searchReleaseName" \
            --arg field "$fieldToUpdate" \
            --arg value "$fieldValue" \
-           '(.[] | select(.name == $name)) | if has($field) then .[$field] |= $value else . = { ($field) : $value} + . end' \
+           'if (.[] | select(.name == $name)) | has($field) then (.[] | select(.name == $name)).[$field] |= $value else (.[] | select(.name == $name)) = {($field) : $value} + (.[] | select(.name == $name)) end' \
            "$jiraReleaseJson" > "$jiraReleaseJsonNew" && mv "$jiraReleaseJsonNew" "$jiraReleaseJson" ;
 }
 
