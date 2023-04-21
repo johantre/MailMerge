@@ -3642,12 +3642,12 @@
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285900",
     "id": "285900",
     "name": "Loong weekend GH triggered version",
+    "description": "This is my description",
     "archived": false,
     "released": false,
     "releaseDate": "2025-12-12",
     "overdue": false,
     "userReleaseDate": "12. Dec 25",
-    "projectId": 32311,
-    "description": "This is my description"
+    "projectId": 32311
   }
 ]
