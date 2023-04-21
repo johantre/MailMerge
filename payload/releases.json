@@ -3651,9 +3651,9 @@
     "projectId": 32311
   },
   {
-    "description": "inpakken die handel!",
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285703",
     "id": "285703",
+    "description": "inpakken die handel!",
     "name": "My in-Weekend GH triggered version",
     "archived": false,
     "released": false,
