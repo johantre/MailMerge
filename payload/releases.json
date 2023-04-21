@@ -3663,6 +3663,7 @@
     "projectId": 32311
   },
   {
+    "description": "Loooong or Long, that is the question",
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285577",
     "id": "285577",
     "name": "Long Weekend GH triggered version",
