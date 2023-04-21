@@ -105,10 +105,12 @@ function updateJiraReleaseJsonField() {
   fieldValue=$3;
 
   # shellcheck disable=SC2016
-  "$jqCmd" --arg name "$searchReleaseName" \
-           --arg field "$fieldToUpdate" \
-           --arg value "$fieldValue" \
-           'if (.[] | select(.name == $name)) | has($field) then (.[] | select(.name == $name)).[$field] |= $value else (.[] | select(.name == $name)) = {($field) : $value} + (.[] | select(.name == $name)) end' \
+  "$jqCmd" --arg name "${searchReleaseName}" \
+           --arg field "${fieldToUpdate}" \
+           --arg value "${fieldValue}" \
+           'if (.[] | select(.name == $name)) | has($field) then
+           (.[] | select(.name == $name))[$field] |= $value else
+           (.[] | select(.name == $name)) = {($field) : $value} + (.[] | select(.name == $name)) end' \
            "$jiraReleaseJson" > "$jiraReleaseJsonNew" && mv "$jiraReleaseJsonNew" "$jiraReleaseJson" ;
 }
 

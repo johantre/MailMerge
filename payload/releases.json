@@ -3641,7 +3641,7 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285900",
     "id": "285900",
-    "description": "This is my description, trigger me daddy!",
+    "description": "Call my your daddy",
     "name": "Loong weekend GH triggered version",
     "archived": false,
     "released": false,
@@ -3651,6 +3651,7 @@
     "projectId": 32311
   },
   {
+    "description": "Call my your daddy",
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285703",
     "id": "285703",
     "name": "My in-Weekend GH triggered version",
