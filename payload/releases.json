@@ -3641,8 +3641,8 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285900",
     "id": "285900",
-    "name": "Loong weekend GH triggered version",
     "description": "This is my description, trigger me daddy!",
+    "name": "Loong weekend GH triggered version",
     "archived": false,
     "released": false,
     "releaseDate": "2025-12-12",
