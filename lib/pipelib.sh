@@ -105,7 +105,7 @@ function updateJiraRelease() {
     relId=$("$jqCmd" -r '.id' <<< "$changedJsonPayload");
     name=$("$jqCmd" -r '.name' <<< "$changedJsonPayload");
     releaseDate=$("$jqCmd" -r '.releaseDate' <<< "$changedJsonPayload");
-    description=$("$jqCmd" -r '.description' <<< "$changedJsonPayload");
+    description=$("$jqCmd" -r 'if .description == null then empty else .description end' <<< "$changedJsonPayload");
     archived=$("$jqCmd" -r '.archived' <<< "$changedJsonPayload");
     released=$("$jqCmd" -r '.released' <<< "$changedJsonPayload");
 
