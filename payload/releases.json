@@ -3637,17 +3637,5 @@
     "userStartDate": "24. Apr 23",
     "userReleaseDate": "13. May 23",
     "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285553",
-    "id": "285553",
-    "description": "null",
-    "name": "End of Week GH triggered version",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2026-10-10",
-    "overdue": false,
-    "userReleaseDate": "10. Oct 26",
-    "projectId": 32311
   }
 ]
