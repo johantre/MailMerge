@@ -95,8 +95,8 @@ function getJiraReleaseJsonField() {
 
   # shellcheck disable=SC2016
   "$jqCmd" --arg releasetoget "$searchReleaseName" \
-                    --arg fieldtoget "$fieldToGet" \
-                    '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' < "$jiraReleaseJson" ;
+           --arg fieldtoget "$fieldToGet" \
+           '.[] | if .name == $releasetoget then .[$fieldtoget] else empty end' < "$jiraReleaseJson" ;
 }
 
 function updateJiraReleaseJsonField() {
@@ -108,8 +108,8 @@ function updateJiraReleaseJsonField() {
   "$jqCmd" --arg name "$searchReleaseName" \
            --arg field "$fieldToUpdate" \
            --arg value "$fieldValue" \
-           '(.[] | select(.name == $name))[$field] |= $value' \
-           "$jiraReleaseJson" > "$jiraReleaseJsonNew" && mv "$jiraReleaseJsonNew" "$jiraReleaseJson";
+           '(.[] | select(.name == $name)) | if has($field) then .[$field] |= $value else . = { ($field) : $value} + . end' \
+           "$jiraReleaseJson" > "$jiraReleaseJsonNew" && mv "$jiraReleaseJsonNew" "$jiraReleaseJson" ;
 }
 
 # functional calls to manipulate what pipeline needs to pickup
