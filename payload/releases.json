@@ -3675,6 +3675,7 @@
     "projectId": 32311
   },
   {
+    "description": "I'm so happy",
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285578",
     "id": "285578",
     "name": "My Release in TRI COLOR",
