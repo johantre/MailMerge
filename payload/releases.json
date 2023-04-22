@@ -3680,9 +3680,8 @@
     "description": "I'm so happy",
     "name": "My Release in TRI COLOR",
     "archived": true,
-    "released": "true",
+    "released": true,
     "releaseDate": "2023-12-12",
-    "overdue": false,
     "userReleaseDate": "12. Dec 23",
     "projectId": 32311
   }
