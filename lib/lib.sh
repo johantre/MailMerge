@@ -1,4 +1,7 @@
 function init() {
+  NC='\033[0m';
+  RED='\033[0;31m';
+  GREEN='\033[0;32m';
   prodProps="$DIR/../../env/prod.update.properties"
   localProps="$DIR/../../env/local.update.properties"
   jiraReleaseJson="$DIR/../../payload/releases.json"
@@ -13,6 +16,9 @@ function init() {
     echo "Falling back to remote $prodProps for jqCmd: $jqCmd"
   fi
 
+  export NC;
+  export RED;
+  export GREEN;
   export jqCmd;
   export prodProps;
   export jiraReleaseJson;
@@ -209,7 +215,7 @@ function gitCommit() {
   gitUser=$(whoami);
 
   echo "git Commit from $caller by $gitUser";
-  git commit -a -m "CLI commit performed from $caller by $gitUser for $releaseName";
+  git commit -a -m "CLI commit from $caller by $gitUser for -->$releaseName<--";
 
   git config --global --unset user.email
   git config --global --unset user.name

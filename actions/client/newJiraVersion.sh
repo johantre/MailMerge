@@ -11,7 +11,7 @@ gitPullClient
 # (deployment pipe does the rest)
 while true; do
 
-  read -r -p "$(echo -e "Type your new jira release name (e.g. MY Release W03) : ")" jiraReleaseName;
+  read -r -p "$(echo -e "$GREEN Type your new jira release name $RED(e.g. MY Release W03) $NC: ")" jiraReleaseName;
 
   existingReleaseName=$(getJiraReleaseName "$jiraReleaseName") ;
   existingStagedReleaseDate=$(getPropValue "$jiraReleaseName" "$jiraReleaseDateProps") ;
@@ -22,7 +22,7 @@ while true; do
     then
       while true; do
 
-        read -r -p "$(echo -e "Type your jira release date in the right format. (YYYY-MM-DD e.g. 2023-12-01) : ")" jiraReleaseDate;
+        read -r -p "$(echo -e "$GREEN Type your jira release date in the right format. $RED(YYYY-MM-DD e.g. 2023-12-01) $NC: ")" jiraReleaseDate;
 
         if jiraReleaseDate=$(date -d "$jiraReleaseDate" +'%Y'-'%m'-'%d');
         then
@@ -32,15 +32,15 @@ while true; do
 
           gitPushClient
           break;
-        else read -r -p "$(echo -e "Incorrect date format for: $jiraReleaseDate. Format is YYYY-MM-DD. (e.g. 2023-12-01)  Try again? (Y/N) : ")" tryAgain;
+        else read -r -p "$(echo -e "$GREEN Incorrect date format for: $jiraReleaseDate. Format is$RED YYYY-MM-DD. (e.g. 2023-12-01)$NC  Try again? $RED(Y/N) $NC: ")" tryAgain;
           if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
         fi;
       done
       break;
-    else read -r -p "$(echo -e "Release w name: $jiraReleaseName already exists. Try again? (Y/N):")" tryAgain;
+    else read -r -p "$(echo -e "$GREEN Release w name: $jiraReleaseName already exists. Try again? $RED(Y/N) $NC: ")" tryAgain;
       if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
     fi ;
-  else read -r -p "$(echo -e "Release w name: $jiraReleaseName is already staged to be created. Try again? (Y/N):")" tryAgain;
+  else read -r -p "$(echo -e "$GREEN Release w name: $jiraReleaseName is already staged to be created. Try again? $RED(Y/N) $NC: ")" tryAgain;
     if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
   fi ;
 done

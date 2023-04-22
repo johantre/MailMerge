@@ -12,22 +12,22 @@ gitPullClient
 
 while true; do
 
-  read -r -p "$(echo -e "Type your jira release name to update its description : ")" jiraReleaseName;
+  read -r -p "$(echo -e "$GREEN Type your jira release name to update its description $NC: ")" jiraReleaseName;
 
   existingReleaseName=$(getJiraReleaseName "$jiraReleaseName") ;
 
   if [[ -z $existingReleaseName ]];
-  then read -r -p "$(echo -e "Release w name: $jiraReleaseName does not exist. Try again? (Y/N):")" tryAgain;
+  then read -r -p "$(echo -e "$GREEN Release w name: $jiraReleaseName does not exist. Try again? $RED(Y/N) $NC: ")" tryAgain;
     if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
   else
-    read -r -p "$(echo -e "Type your new release description : ")" newJiraReleaseDescription;
+    read -r -p "$(echo -e "$GREEN Type your new release description $NC: ")" newJiraReleaseDescription;
 
     updateJiraReleaseDescription "$jiraReleaseName" "$newJiraReleaseDescription";
     break;
   fi
 done
 
-gitCommit "$0"
+gitCommit "$0" "$jiraReleaseName"
 
 gitPushClient
 
