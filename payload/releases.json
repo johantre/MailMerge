@@ -3679,7 +3679,7 @@
     "id": "285578",
     "description": "I'm so happy",
     "name": "My Release in TRI COLOR",
-    "archived": "false",
+    "archived": false,
     "released": true,
     "releaseDate": "2023-12-12",
     "userReleaseDate": "12. Dec 23",
