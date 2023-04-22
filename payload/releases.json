@@ -3677,7 +3677,7 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285578",
     "id": "285578",
-    "description": "I'm so happy",
+    "description": "My Description",
     "name": "My Release in TRI COLOR",
     "archived": false,
     "released": false,
