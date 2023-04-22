@@ -3637,53 +3637,5 @@
     "userStartDate": "24. Apr 23",
     "userReleaseDate": "13. May 23",
     "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285900",
-    "id": "285900",
-    "description": "BULLET PROOF Kevlar test SUCCEEDED!",
-    "name": "BULLET PROOF Kevlar test -> Loong weekend GH triggered version",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2025-12-12",
-    "overdue": false,
-    "userReleaseDate": "12. Dec 25",
-    "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285703",
-    "id": "285703",
-    "description": "inpakken die handel!",
-    "name": "My in-Weekend GH triggered version",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2023-12-12",
-    "overdue": false,
-    "userReleaseDate": "12. Dec 23",
-    "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285577",
-    "id": "285577",
-    "description": "Gaaaast : het MARCHEERT!!",
-    "name": "Long Weekend GH triggered version",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2023-12-12",
-    "overdue": false,
-    "userReleaseDate": "12. Dec 23",
-    "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285578",
-    "id": "285578",
-    "description": "My Description",
-    "name": "BULLET PROOF GAST!!",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2023-10-10",
-    "overdue": false,
-    "userReleaseDate": "12. Dec 23",
-    "projectId": 32311
   }
 ]
