@@ -32,7 +32,7 @@ while true; do
 
           gitPushClient
           break;
-        else read -r -p "$(echo -e "$GREEN Incorrect date format for: $jiraReleaseDate. Format is$RED YYYY-MM-DD. (e.g. 2023-12-01)$NC  Try again? $RED(Y/N) $NC: ")" tryAgain;
+        else read -r -p "$(echo -e "$GREEN Incorrect date format for: $jiraReleaseDate. Format is$RED YYYY-MM-DD. (e.g. 2023-12-01)$GREEN  Try again? $RED(Y/N) $NC: ")" tryAgain;
           if [[ "$tryAgain" != [yY] ]]; then exit 0; fi;
         fi;
       done
