@@ -3642,7 +3642,7 @@
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285900",
     "id": "285900",
     "description": "BULLET PROOF Kevlar protec",
-    "name": "Loong weekend GH triggered version",
+    "name": "BULLET PROOF Kevlar test -> Loong weekend GH triggered version",
     "archived": false,
     "released": false,
     "releaseDate": "2025-12-12",
@@ -3665,7 +3665,7 @@
   {
     "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/285577",
     "id": "285577",
-    "description": "Gaaaast : het MARCHEERT!!",
+    "description": "BULLET PROOF Kevlar test -> Gaaaast : het MARCHEERT!!",
     "name": "Long Weekend GH triggered version",
     "archived": false,
     "released": false,
