@@ -12,7 +12,7 @@ initJiraCredentials
 
 updateJiraRelease
 
-gitCommit
+gitCommit "$0" "previous client commit"
 
 gitPush
 
