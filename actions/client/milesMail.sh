@@ -5,10 +5,12 @@
 # This code can be used to tell the pipeline what mail should be sent, by telling what database is touched.
 
 # In progress:
-# * getting screenshots w headless browser & Python,
-# * save screenshot to $DIR/../../images/releaseName folder under the name image001.png
-# * getting assigned users from Jira tests (REST)
-# * update mail addresses of above assigned users in database files in 'right' (=what this script generates) $DIR/../../templatedata folder
+# * getting screenshots w headless browser & Python, (see ../../ScreenCapture.py)
+# * save screenshot to $DIR/../../images/releaseName folder under the name image001.png (see ../../ScreenCapture.py)
+# * getting assigned users from Jira tests (REST) + mail address
+# * getting jira release URL
+# * update 'right' (=see ./actions/client/milesMail.sh)mail database CSV file in $DIR/../../templatedata folder
+# * re-use this script to tell pipeline after push what mail to send.
 # * cleanup useless cat's
 
 DIR=$(dirname "$0")

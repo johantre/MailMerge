@@ -1,6 +1,23 @@
 # Added to Git for handover
 # UNTESTED CODE!!!!!
-# This is the first script to generate the Test Runs Report from our pipeline, when e.g.
+# This is the first script to generate the Test Runs Report from our pipeline, when e.g. a release is set to "released": true
+# This code can be used before sending out the mail template with mailmerge.
+# Specifically, before sending out with the Deployment templates ./templates/layouts/Deployment<Single/Multiple>Market.html,
+# as they require manual work:
+# * generating XRay Test Run report, (done by this script)
+# * manually take screenshot, (done by this script)
+# * copy/paste in Outlook mail, (can be done by mailmerge facilities in this repo)
+# * copy/paste Jira Release URL, (work in progress, see ./actions/client/milesMail.sh
+
+# In progress:
+# * getting screenshots w headless browser & Python, (done by this script)
+# * save screenshot to $DIR/../../images/releaseName folder under the name image001.png (done by this script)
+# * getting assigned users from Jira tests (REST) + mail address
+# * getting jira release URL
+# * update 'right' (=see ./actions/client/milesMail.sh)mail database CSV file in $DIR/../../templatedata folder
+# * re-use the ./actions/client/milesMail.sh script to tell pipeline after push what mail to send.
+# * cleanup useless cat's
+
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
