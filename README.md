@@ -1,9 +1,78 @@
 This repo serves 2 purposes.  
+* Jira Release editor
 * MailMerge 
-* JiraVersion editor
 
 Both are implemented around a GH Actions pipeline, found in the .github/workflows folder.
 Both can be used with or without each other.  Future will tell how this repo will evolve. 
+
+# Jira Release editor
+
+## Source of existence
+In Atlassian Jira applying CRUD operations on a release in Jira is not possible without having the role of Project Administrator.
+At the moment of writing this is a Defect that is gathering interest for quite some years now.
+To overcome this, this part of the repo is created.
+
+What this part of the repo provides functionality for, is to allow normal users to request this repo to for a CRUD operation.
+This happens in a interactive way, through command line asking for arguments that are needed for these CRUD operations.
+Behind the scenes, these scripts do locally a git-commit of the users request, and finish that off with a git-push.
+
+The benefits:
+* Jira version manipulations are been tracked now.
+* The need to give people Project Administrator rights in order to manipulate Jira Versions became due.\
+  From now on, people can use these client scripts and are able to manipulate Jira Versions without the need for the "Project Administrator" role. The user that will do the actual manipulations in Jira is a technical QQ-account.
+
+## Pre-req's
+* Having a GitHub account.
+* Having this repo on your local machine.  (Clone this repo to your local machine.)
+  * Many explanations can be found in the corporate Confluence and the Developer Portal.
+* Having a Linux terminal available to run these client scripts.
+  * Git Bash is an example, this can be found as Git for Windows in the WUSS.
+  * An even better and more user friendly choice is IntelliJ Community edition, which contains several types of terminals.
+  * Top notch, is of course having a Linux machine. There everything is available.
+* No additional Git knowledge required, apart from the concept how Git works. (commit locally, push to remote)
+
+## Manual Usage
+* Go to the folder where the client scripts are:\
+  **$cd ./actions/client**
+* Show the client scripts\
+  **$ls -lst**  to see the client scripts if you don't know the by heart.
+  * Or look with IntelliJ in the folder structure, which will provide more insights.
+* Type **$bash**  (with the space after)
+* Start typing now the first letters of your script + hit the Tab button; e.g. 'new'+Tab.\
+  This is standard autocomplete functionality in Linux: you'll see the full name of the script.\Finish off by smashing the Enter key. \other examples:
+  * 'bash rel'+Tab -> $bash releaseJiraVersion.sh
+  * 'bash ar'+Tab -> $bash archiveJiraVersion.sh
+  * 'bash unA'+Tab -> $bash unArchiveJiraVersion.sh
+  * 'bash unR'+Tab -> $bash unReleaseJiraVersion.sh
+  * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'D'+Tab -> $bash updateJiraVersionDescription.sh
+  * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'N'+Tab -> $bash updateJiraVersionName.sh
+  * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'R'+Tab -> $bash updateJiraVersionReleaseDate.sh
+
+The client scripts will guide you through all needed information.
+Once finished, you'll find the GitHub Actions pipeline doing the rest for you: update/create the Jira Version as you requested.
+
+## File structure
+
+### Scripts Folders
+[./actions/client](./actions/client) is the location of all client scripts. They are all interactive, and ask you for the needed input. There is some checking in it as well, e.g. the right data format, already existing Jira versions etc...\
+[./actions/server](./actions/server) contains the heavy fork lifting. These are the scripts that are launched by the pipeline and to the actual Jira operations for you, but with a technical QQ-account.
+
+[./actions/server/createRequestedVersions.sh](./actions/server/createRequestedVersions.sh) Does what it suggests it does.\
+Create requested versions, which is triggered from client script [./actions/client/newJiraVersion.sh](./actions/client/newJiraVersion.sh).
+
+[./actions/server/updateChangedVersion.sh](./actions/server/updateChangedVersion.sh) Does what it suggests it does.\
+Update versions, which is triggered from client scripts:
+* [./actions/client/archiveJiraVersion.sh](./actions/client/archiveJiraVersion.sh)
+* [./actions/client/releaseJiraVersion.sh](./actions/client/releaseJiraVersion.sh)
+* [./actions/client/unArchiveJiraVersion.sh](./actions/client/unArchiveJiraVersion.sh)
+* [./actions/client/unReleaseJiraVersion.sh](./actions/client/unReleaseJiraVersion.sh)
+* [./actions/client/updateJiraVersionDescription.sh](./actions/client/updateJiraVersionDescription.sh)
+* [./actions/client/updateJiraVersionName.sh](./actions/client/updateJiraVersionName.sh)
+* [./actions/client/updateJiraVersionReleaseDate.sh](./actions/client/updateJiraVersionReleaseDate.sh)
+
+### Underlying scripts
+* [./lib/lib.sh](./lib/lib.sh) contains all boilerplate scripts used in the **client** scripts.
+* [./lib/pipelib.sh](./lib/pipelib.sh) contains all boilerplate scripts used in the **server** scripts.
 
 # MailMerge
 Simple templates to send from cli, or in automation.\
@@ -124,71 +193,3 @@ Opening the csv databases with Excel and saving
   * Having your approval reply mail triggering a pipeline. 
   * Having your mail sent when a pipeline is (successfully) finished. 
 
-# JiraVersion editor
-
-## Source of existence 
-In Atlassian Jira applying CRUD operations on a releases in Jira is not possible without having the role of Project Administrator. 
-At the moment of writing this is a Defect that is gathering interest for quite some years now. 
-To overcome this, this part of the repo is created. 
-
-What this part of the repo provides functionality for, is to allow normal users to request this repo to for a CRUD operation. 
-This happens in a interactive way, through command line asking for arguments that are needed for these CRUD operations. 
-Behind the scenes, these scripts do locally a git-commit of the users request, and finish that off with a git-push.
-
-The benefits: 
-* Jira version manipulations are been tracked now.
-* The need to give people Project Administrator rights in order to manipulate Jira Versions became due.\
-From now on, people can use these client scripts and are able to manipulate Jira Versions without the need for the "Project Administrator" role. The user that will do the actual manipulations in Jira is a technical QQ-account.
-
-## Pre-req's
-* Having a GitHub account. 
-* Having this repo on your local machine.  (Clone this repo to your local machine.)
-  * Many explanations can be found in the corporate Confluence and the Developer Portal. 
-* Having a Linux terminal available to run these client scripts. 
-  * Git Bash is an example, this can be found as Git for Windows in the WUSS.
-  * An even better and more user friendly choice is IntelliJ Community edition, which contains several types of terminals. 
-  * Top notch, is of course having a Linux machine. There everything is available.   
-* No additional Git knowledge required, apart from the concept how Git works. (commit locally, push to remote)
-
-## Manual Usage
-* Go to the folder where the client scripts are:\
-**$cd ./actions/client**
-* Show the client scripts\
-**$ls -lst**  to see the client scripts if you don't know the by heart.
-  * Or look with IntelliJ in the folder structure, which will provide more insights. 
-* Type **$bash**  (with the space after)
-* Start typing now the first letters of your script + hit the Tab button; e.g. 'new'+Tab.\
-This is standard autocomplete functionality in Linux: you'll see the full name of the script.\Finish off by smashing the Enter key. \other examples: 
-  * 'bash rel'+Tab -> $bash releaseJiraVersion.sh
-  * 'bash ar'+Tab -> $bash archiveJiraVersion.sh
-  * 'bash unA'+Tab -> $bash unArchiveJiraVersion.sh
-  * 'bash unR'+Tab -> $bash unReleaseJiraVersion.sh
-  * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'D'+Tab -> $bash updateJiraVersionDescription.sh
-  * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'N'+Tab -> $bash updateJiraVersionName.sh
-  * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'R'+Tab -> $bash updateJiraVersionReleaseDate.sh
-
-The client scripts will guide you through all needed information. 
-Once finished, you'll find the GitHub Actions pipeline doing the rest for you: update/create the Jira Version as you requested.
-
-## File structure
-
-### Scripts Folders
-[./actions/client](./actions/client) is the location of all client scripts. They are all interactive, and ask you for the needed input. There is some checking in it as well, e.g. the right data format, already existing Jira versions etc...\
-[./actions/server](./actions/server) contains the heavy fork lifting. These are the scripts that are launched by the pipeline and to the actual Jira operations for you, but with a technical QQ-account. 
-
-[./actions/server/createRequestedVersions.sh](./actions/server/createRequestedVersions.sh) Does what it suggests it does.\
-Create requested versions, which is triggered from client script [./actions/client/newJiraVersion.sh](./actions/client/newJiraVersion.sh).  
-
-[./actions/server/updateChangedVersion.sh](./actions/server/updateChangedVersion.sh) Does what it suggests it does.\
-Update versions, which is triggered from client scripts: 
-* [./actions/client/archiveJiraVersion.sh](./actions/client/archiveJiraVersion.sh) 
-* [./actions/client/releaseJiraVersion.sh](./actions/client/releaseJiraVersion.sh)
-* [./actions/client/unArchiveJiraVersion.sh](./actions/client/unArchiveJiraVersion.sh) 
-* [./actions/client/unReleaseJiraVersion.sh](./actions/client/unReleaseJiraVersion.sh) 
-* [./actions/client/updateJiraVersionDescription.sh](./actions/client/updateJiraVersionDescription.sh) 
-* [./actions/client/updateJiraVersionName.sh](./actions/client/updateJiraVersionName.sh) 
-* [./actions/client/updateJiraVersionReleaseDate.sh](./actions/client/updateJiraVersionReleaseDate.sh) 
-
-### Underlying scripts
-* [./lib/lib.sh](./lib/lib.sh) contains all boilerplate scripts used in the **client** scripts.   
-* [./lib/pipelib.sh](./lib/pipelib.sh) contains all boilerplate scripts used in the **server** scripts.   
