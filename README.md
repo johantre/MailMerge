@@ -14,22 +14,34 @@ To overcome this, this part of the repo is created.
 
 What this part of the repo provides functionality for, is to allow normal users to request this repo to for a CRUD operation.
 This happens in a interactive way, through command line asking for arguments that are needed for these CRUD operations.
-Behind the scenes, these scripts do locally a git-commit of the users request, and finish that off with a git-push.
+Behind the scenes these scripts do locally a git-commit of the users request, and finish that off with a git-push.
+When a git push is detected in the central repo, a pipeline finishes of the Jira manipulation through a technical QQ account. (see pre-req's)
+
 
 The benefits:
-* Jira version manipulations are been tracked now.
-* The need to give people Project Administrator rights in order to manipulate Jira Versions became due.\
-  From now on, people can use these client scripts and are able to manipulate Jira Versions without the need for the "Project Administrator" role. The user that will do the actual manipulations in Jira is a technical QQ-account.
+* Jira Release manipulations are been tracked now.
+* The need to give people Project Administrator rights in order to manipulate Jira Releases became due.\
+  From now on, people can use these client scripts and are able to manipulate Jira Releases without the need for the "Project Administrator" role. The user that will do the actual manipulations in Jira is a technical QQ-account.
 
 ## Pre-req's
-* Having a GitHub account.
+* Having a personal GitHub account to tell GitHub what Jira Release manipulation you want.
 * Having this repo on your local machine.  (Clone this repo to your local machine.)
   * Many explanations can be found in the corporate Confluence and the Developer Portal.
 * Having a Linux terminal available to run these client scripts.
   * Git Bash is an example, this can be found as Git for Windows in the WUSS.
   * An even better and more user friendly choice is IntelliJ Community edition, which contains several types of terminals.
   * Top notch, is of course having a Linux machine. There everything is available.
-* No additional Git knowledge required, apart from the concept how Git works. (commit locally, push to remote)
+* No additional Git knowledge required, apart from the concept how Git works. (commit locally, push to remote) 
+* Jira access. The scripts provided use either a technical Q-account (server side) to update Jira JQL's.
+  You need a technical Q-account and permission to update the Jira Releases from the json file. (see below)\
+  Currently, GitHub Actions of this GitHub project takes care of the automation towards Jira updating with a **technical user:  QQMIBI4**.\
+  At the moment of writing, this project is for MILES4ALL Jira project only.\
+  In order to have this project able to update *your* Jira project, we'll need to extract that detail into a property file\
+  Like that, you would 
+  - give this **QQMIBI4** user permission to your Jira project
+  - write *your own* json payload file (see examples) with *your* queries in it, commit & push to this repo
+  - GitHub Actions will update Jira with your requested Jira Release changes it finds in a changed json files it sees at git push time.
+
 
 ## Manual Usage
 * Go to the folder where the client scripts are:\
@@ -49,19 +61,25 @@ The benefits:
   * 'bash upd'+Tab -> $bash updateJiraVersion  + Type further 'R'+Tab -> $bash updateJiraVersionReleaseDate.sh
 
 The client scripts will guide you through all needed information.
-Once finished, you'll find the GitHub Actions pipeline doing the rest for you: update/create the Jira Version as you requested.
+Once finished, you'll find the GitHub Actions pipeline doing the rest for you: update/create the Jira Release as you requested.
 
 ## File structure
 
 ### Scripts Folders
-[./actions/client](./actions/client) is the location of all client scripts. They are all interactive, and ask you for the needed input. There is some checking in it as well, e.g. the right data format, already existing Jira versions etc...\
-[./actions/server](./actions/server) contains the heavy fork lifting. These are the scripts that are launched by the pipeline and to the actual Jira operations for you, but with a technical QQ-account.
-
+#### Server scripts
+[./actions/server](./actions/server) contains the heavy fork lifting.\
+These are the scripts that are launched by the pipeline and to the actual Jira operations for you, but with a technical QQ-account.\
 [./actions/server/createRequestedVersions.sh](./actions/server/createRequestedVersions.sh) Does what it suggests it does.\
-Create requested versions, which is triggered from client script [./actions/client/newJiraVersion.sh](./actions/client/newJiraVersion.sh).
-
+Create requested Releases, which is triggered from client script [./actions/client/newJiraVersion.sh](./actions/client/newJiraVersion.sh).
 [./actions/server/updateChangedVersion.sh](./actions/server/updateChangedVersion.sh) Does what it suggests it does.\
-Update versions, which is triggered from client scripts:
+Update Releases, which is triggered as a consequence of git manipulations in the client scripts below.
+
+#### Client scripts
+[./actions/client](./actions/client) is the location of all client scripts.\
+They are all interactive, and ask you for the needed input.\
+It contains is some checking in it as well, e.g. the right data format, already existing Jira releases etc...
+
+
 * [./actions/client/archiveJiraVersion.sh](./actions/client/archiveJiraVersion.sh)
 * [./actions/client/releaseJiraVersion.sh](./actions/client/releaseJiraVersion.sh)
 * [./actions/client/unArchiveJiraVersion.sh](./actions/client/unArchiveJiraVersion.sh)
