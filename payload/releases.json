@@ -3680,5 +3680,16 @@
     "overdue": false,
     "userReleaseDate": "12. Dec 23",
     "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/289225",
+    "id": "289225",
+    "name": "THIS RELEASE TWERKS!!!!",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2023-10-10",
+    "overdue": false,
+    "userReleaseDate": "10. Oct 23",
+    "projectId": 32311
   }
 ]
