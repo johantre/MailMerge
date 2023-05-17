@@ -3691,5 +3691,16 @@
     "overdue": false,
     "userReleaseDate": "10. Oct 23",
     "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/288974",
+    "id": "288974",
+    "name": "THIS RELEASE IS BOOTY POPPIN, MAN!",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2023-01-12",
+    "overdue": true,
+    "userReleaseDate": "12. Jan 23",
+    "projectId": 32311
   }
 ]
