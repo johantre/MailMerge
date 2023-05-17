@@ -3702,5 +3702,16 @@
     "overdue": true,
     "userReleaseDate": "12. Jan 23",
     "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/288975",
+    "id": "288975",
+    "name": "A LAST ONE FOR THIS EVENING",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2023-12-12",
+    "overdue": false,
+    "userReleaseDate": "12. Dec 23",
+    "projectId": 32311
   }
 ]
