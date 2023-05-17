@@ -199,7 +199,7 @@ function gitPull() {
 
 function gitPush() {
   echo "git Push";
-#  git push;
+  git push;
 }
 
 function gitPullClient() {
@@ -209,7 +209,7 @@ function gitPullClient() {
 
 function gitPushClient() {
   echo "git Push jira-release-editor-mail-merge master";
-#  git push jira-release-editor-mail-merge master;
+  git push jira-release-editor-mail-merge master;
 }
 
 function gitCommit() {
@@ -221,5 +221,5 @@ function gitCommit() {
   git commit -a -m "CLI commit from $caller by $gitUser for -->$releaseName<--";
 
   git config --global --unset user.email
-#  git config --global --unset user.name
+  git config --global --unset user.name
 }
