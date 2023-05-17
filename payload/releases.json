@@ -3680,5 +3680,16 @@
     "overdue": false,
     "userReleaseDate": "12. Dec 23",
     "projectId": 32311
+  },
+  {
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/289040",
+    "id": "289040",
+    "name": "DANG IT",
+    "archived": false,
+    "released": false,
+    "releaseDate": "2023-12-12",
+    "overdue": false,
+    "userReleaseDate": "12. Dec 23",
+    "projectId": 32311
   }
 ]
