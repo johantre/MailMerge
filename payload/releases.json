@@ -3671,42 +3671,9 @@
     "projectId": 32311
   },
   {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/289427",
-    "id": "289427",
-    "name": "THIS RELEASE ROCKS BABY!!",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2023-12-12",
-    "overdue": false,
-    "userReleaseDate": "12. Dec 23",
-    "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/289225",
-    "id": "289225",
-    "name": "THIS RELEASE TWERKS!!!!",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2023-10-10",
-    "overdue": false,
-    "userReleaseDate": "10. Oct 23",
-    "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/288974",
-    "id": "288974",
-    "name": "THIS RELEASE IS BOOTY POPPIN, MAN!",
-    "archived": false,
-    "released": false,
-    "releaseDate": "2023-01-12",
-    "overdue": true,
-    "userReleaseDate": "12. Jan 23",
-    "projectId": 32311
-  },
-  {
-    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/288975",
-    "id": "288975",
-    "name": "A LAST ONE FOR THIS EVENING",
+    "self": "https://atc.bmwgroup.net/jira/rest/api/2/version/289331",
+    "id": "289331",
+    "name": "RETESTING RELEASE",
     "archived": false,
     "released": false,
     "releaseDate": "2023-12-12",
