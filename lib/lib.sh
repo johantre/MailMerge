@@ -200,13 +200,13 @@ function gitPush() {
 }
 
 function gitPullClient() {
-  echo "git Pull mail-merge master";
-  git pull mail-merge master;
+  echo "git Pull jira-release-editor-mail-merge master";
+  git pull jira-release-editor-mail-merge master;
 }
 
 function gitPushClient() {
-  echo "git Push mail-merge master";
-  git push mail-merge master;
+  echo "git Push jira-release-editor-mail-merge master";
+  git push jira-release-editor-mail-merge master;
 }
 
 function gitCommit() {
