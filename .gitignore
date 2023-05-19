@@ -2,3 +2,6 @@
 Sandbox/
 env/local.jira.secret.properties
 env/local.update.properties
+**/geckodriver.log
+**/.pytest_cache
+**/__pycache__

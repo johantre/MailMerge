@@ -8,7 +8,6 @@
 # * manually take screenshot, (done by this script)
 # * copy/paste in Outlook mail, (can be done by mailmerge facilities in this repo)
 # * copy/paste Jira Release URL, (work in progress, see ./actions/client/milesMail.sh
-from telnetlib import EC
 
 # In progress:
 # * getting screenshots w headless browser & Python, (done by this script)
@@ -21,59 +20,56 @@ from telnetlib import EC
 
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.common.exceptions import NoSuchElementException
 import datetime
+
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
+class MyClass:
+    def screencapture(self, capturepath, projectkey, fixversion):
+        baseurl = "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-jql/#api-group-jql"
 
-def screencapture(capturepath: str,
-                  projectkey: str,
-                  fixversion: str):
-    baseurl = "https://atc.bmwgroup.net/jira/secure/XrayReport!default.jspa?selectedReportKey=xray-report-testruns&selectedProjectKey=" + projectkey + "&filterScope=filter&fixVersion=" + fixversion
+        options = Options()
+        # uncomment once working & pipeline execution run
+        # options.add_argument('-headless')
 
-    options = Options()
-    # uncomment once working & pipeline execution run
-    # options.add_argument('-headless')
+        e = datetime.datetime.now()
+        print("before webdriver (WD) instantiation: %s:%s:%s" % (e.hour, e.minute, e.second))
 
-    e = datetime.datetime.now()
-    print("before webdriver (WD) instantiation: %s:%s:%s" % (e.hour, e.minute, e.second))
+        driver = webdriver.Firefox(options=options)
 
-    driver = webdriver.Firefox(options=options)
+        e = datetime.datetime.now()
+        print("WD instantiated: %s:%s:%s" % (e.hour, e.minute, e.second))
 
-    e = datetime.datetime.now()
-    print("WD instantiated: %s:%s:%s" % (e.hour, e.minute, e.second))
+        driver.get(baseurl)
+        driver.maximize_window()
+        wait = WebDriverWait(driver, 5)
 
-    driver.get(baseurl)
-    wait = WebDriverWait(driver, 5)
+        try:
+            # Click away Garbage "Get started"
+            element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[2]/div/div[2]/div/div/section/div[2]/div/button/span')))
+            element.click()
 
-    try:
-        # TODO: First, Login w QQ account!!
+            # Click away Garbage "Skip"
+            element = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[2]/div[3]/div/div/div/div[2]/div/div[2]/button/span')))
+            element.click()
 
-        # TODO: Click away Jira garbage !!
+            # Click intended button "Show child properties"
+            element = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[3]/div[2]/div/div/div[2]/div[1]/div[6]/div/div/div/button')))
+            element.click()
 
-        # Click the "Generate Report" button
-        element = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[@id='raven-load-testruns-requirement-converage-report']")))
-        element.click()
+            driver.get_full_page_screenshot_as_file(capturepath)
 
-        # Click the "Load all" button
-        element = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[@id='load-all-bt']")))
-        element.click()
+            driver.close()
+        except NoSuchElementException:
+            driver.close()
+            return False
+        return True
 
-        driver.get_full_page_screenshot_as_file(capturepath)
-
-        driver.close()
-    except NoSuchElementException:
-        driver.close()
-        return False
-    return True
-
-
-screencapture("XRayReport.png", "MILES4ALL", "2023 FNC Q2 BE")
 
 # URLs Needed  & Xpath to use
 # Base URL https://atc.bmwgroup.net/jira/secure/XrayReport!default.jspa?selectedReportKey=xray-report-testruns&selectedProjectKey=MILES4ALL&filterScope=filter&fixVersion=2023+W19+Release+BE
@@ -84,3 +80,14 @@ screencapture("XRayReport.png", "MILES4ALL", "2023 FNC Q2 BE")
 # Load all link  (first check existence!)
 # //*[@id="load-all-bt"]
 #
+
+myclass = MyClass()
+MyClass.screencapture(myclass, "TestJiraScreenshotPage.png", "ddd", "")
+
+#myTest = RecorderTest()
+
+#myTest.test_recording()
+
+#myTest.open("https://stackoverflow.com/q/75652543/7058266")
+#myTest.click('button:contains("Accept all cookies")')
+#myTest.sleep(3)
