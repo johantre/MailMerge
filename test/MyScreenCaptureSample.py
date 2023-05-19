@@ -1,23 +1,8 @@
 # Added to Git for handover
-# UNTESTED CODE!!!!!
-# This is the first script to generate the Test Runs Report from our pipeline, when e.g. a release is set to "released": true
-# This code can be used before sending out the mail template with mailmerge.
-# Specifically, before sending out with the Deployment templates ./templates/layouts/Deployment<Single/Multiple>Market.html,
-# as they require manual work:
-# * generating XRay Test Run report, (done by this script)
-# * manually take screenshot, (done by this script)
-# * copy/paste in Outlook mail, (can be done by mailmerge facilities in this repo)
-# * copy/paste Jira Release URL, (work in progress, see ./actions/client/milesMail.sh
-
-# In progress:
-# * getting screenshots w headless browser & Python, (done by this script)
-# * save screenshot to $DIR/../../images/releaseName folder under the name image001.png (done by this script)
-# * getting assigned users from Jira tests (REST) + mail address
-# * getting jira release URL
-# * update 'right' (=see ./actions/client/milesMail.sh)mail database CSV file in $DIR/../../templatedata folder
-# * re-use the ./actions/client/milesMail.sh script to tell pipeline after push what mail to send.
-# * cleanup useless cat's
-
+# TESTED & WORKING code!  Not working in BMW environment however...
+# Currently, Python isn't properly configured, and cannot run from IntelliJ environment.
+# Interpreting isn't working properly:  Firefox Webdriver isn't correct version, as it's complaining about an existing method: get_full_page_screenshot_as_file
+# Use this as example after installing Python properly.
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -41,6 +26,7 @@ class MyClass:
         print("before webdriver (WD) instantiation: %s:%s:%s" % (e.hour, e.minute, e.second))
 
         driver = webdriver.Firefox(options=options)
+        # driver = webdriver.Chrome()
 
         e = datetime.datetime.now()
         print("WD instantiated: %s:%s:%s" % (e.hour, e.minute, e.second))
@@ -62,7 +48,10 @@ class MyClass:
             element = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[3]/div[2]/div/div/div[2]/div[1]/div[6]/div/div/div/button')))
             element.click()
 
+            # full page screenshot for Firefox
             driver.get_full_page_screenshot_as_file(capturepath)
+            # window screenshot for Chrome
+            # driver.get_screenshot_as_file(capturepath)
 
             driver.close()
         except NoSuchElementException:
@@ -71,23 +60,5 @@ class MyClass:
         return True
 
 
-# URLs Needed  & Xpath to use
-# Base URL https://atc.bmwgroup.net/jira/secure/XrayReport!default.jspa?selectedReportKey=xray-report-testruns&selectedProjectKey=MILES4ALL&filterScope=filter&fixVersion=2023+W19+Release+BE
-#
-# Generate button, from the above page
-# //*[@id="raven-load-testruns-requirement-converage-report"]
-
-# Load all link  (first check existence!)
-# //*[@id="load-all-bt"]
-#
-
 myclass = MyClass()
-MyClass.screencapture(myclass, "TestJiraScreenshotPage.png", "ddd", "")
-
-#myTest = RecorderTest()
-
-#myTest.test_recording()
-
-#myTest.open("https://stackoverflow.com/q/75652543/7058266")
-#myTest.click('button:contains("Accept all cookies")')
-#myTest.sleep(3)
+myclass.screencapture("TestJiraScreenshotPage.png", "MILES4ALL", "2023 W19 Release BE")
